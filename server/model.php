@@ -18,3 +18,18 @@ define("DBNAME", "perceau1");
 define("DBLOGIN", "perceau1");
 define("DBPWD", "perceau1");
 // hello
+
+function getAllMovies(){
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le menu avec des paramètres
+    $sql = "select id, name, image from Movie";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}
+}
