@@ -17,3 +17,4 @@ define("HOST", "localhost");
 define("DBNAME", "perceau1");
 define("DBLOGIN", "perceau1");
 define("DBPWD", "perceau1");
+// hello
