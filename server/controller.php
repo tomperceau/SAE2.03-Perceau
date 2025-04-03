@@ -20,6 +20,32 @@
  */
 require("model.php");
 
+function addMoviesController(){
+    /* Lecture des données de formulaire
+      On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
+      vérifiées avant de les envoyer 
+    */
+    $name = $_REQUEST['name'];
+    $year = $_REQUEST['year'];
+    $lengh = $_REQUEST['lengh'];
+    $description = $_REQUEST['description'];
+    $director = $_REQUEST['director'];
+    $image = $_REQUEST['image'];
+    $trailer = $_REQUEST['trailer'];
+    $min_age = $_REQUEST['min_age'];
+    // Mise à jour du menu à l'aide de la fonction updateMenu décrite dans model.php
+    $ok = addMovies($name, $year, $lengh, $description, $director, $image, $trailer, $min_age);
+    // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+    if ($ok!=0){
+      return "Film ajouté à la base de donnée";
+    }
+    else{
+      return false;
+    }
+  }
+
+
+
 function readMoviesController(){
     $movies = getAllMovies();
     return $movies;

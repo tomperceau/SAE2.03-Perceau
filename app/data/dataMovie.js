@@ -3,7 +3,7 @@ let HOST_URL = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau";//"http://mmi.u
 
 let DataMovie = {};
 
-    DataMovie.requestMovies = async function(){
+DataMovie.requestMovies = async function () {
     // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
     // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
     // L'URL finale dépend de la valeur de HOST_URL et de dir.
@@ -14,6 +14,10 @@ let DataMovie = {};
     let movies = await answer.json();
     // Enfin, on retourne ces données.
     return movies;
+
 }
 
-export {DataMovie};
+
+
+export { DataMovie };
+
