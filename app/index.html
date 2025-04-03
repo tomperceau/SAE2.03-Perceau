@@ -11,7 +11,7 @@
 <body>
   <header id="header"></header>
 
-  <section id="content"></section>
+  <section  class="cards" id="content"></section>
 
   <script type="module">
     import { NavBar } from "./component/NavBar/script.js";
@@ -32,6 +32,7 @@
 
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
+      C.getMovie();
     };
 
     C.getMovie = async function () {
@@ -55,6 +56,11 @@
       let header = document.querySelector("#header");
       header.innerHTML = NavBar.format(hAbout);
     };
+
+    V.renderMovie = function (data){
+      let content = document.querySelector("#content");
+      content.innerHTML = Movie.format(data);
+    }
 
     C.start(); // Démarre l'application
   </script>
