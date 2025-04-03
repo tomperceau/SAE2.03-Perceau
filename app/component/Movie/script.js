@@ -10,6 +10,7 @@ Movie.format = function (movies) {
     moviesHtml = moviesHtml.replace("{{titre}}", movie.name);
     moviesHtml = moviesHtml.replace("{{image}}", movie.image);
     html += moviesHtml
+
 });
 
   return html;
