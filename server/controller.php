@@ -28,7 +28,7 @@ function readMoviesController(){
 function addController() {
   header('Content-Type: application/json');
 
-  try {
+
       $name = $_REQUEST['name'];
       $year = $_REQUEST['year'];
       $length = $_REQUEST['length'];
@@ -46,8 +46,6 @@ function addController() {
       } else {
           echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du film"]);
       }
-  } catch (Exception $e) {
-      echo json_encode(["success" => false, "message" => "Erreur serveur : " . $e->getMessage()]);
-  }
+  
   exit();
 }

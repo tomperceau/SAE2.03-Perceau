@@ -34,7 +34,7 @@ function getAllMovies(){
 }
 
 function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age) {
-    try {
+
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
                 VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
@@ -52,10 +52,7 @@ function addMovie($name, $year, $length, $description, $director, $id_category, 
         $stmt->execute();
 
         return $stmt->rowCount(); // Retourne le nombre de lignes affectées
-    } catch (PDOException $e) {
-        error_log("Erreur SQL : " . $e->getMessage());
-        return 0; // Retourne 0 en cas d'erreur
-    }
+    
 }
 
 // function addMovie($titre, $real, $annee, $duree, $des, $cat, $img, $url, $age) {
