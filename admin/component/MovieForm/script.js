@@ -21,9 +21,9 @@ let template = await templateFile.text();
 
 let MovieForm = {};
 
-MovieForm.format = function () {
+MovieForm.format = function (handler) {
   let html = template;
-  html = html.replace('{{windows.C.handleraddMovie()}}', "windows.C.handleraddMovie()");
+  html = html.replace("{{handler}}", handler);
   return html;
 };
 

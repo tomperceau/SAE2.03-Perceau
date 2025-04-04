@@ -33,25 +33,29 @@ function getAllMovies(){
     return $res; // Retourne les résultats
 }
 
-function addMovie($n, $y, $l, $d, $di, $c, $i, $t, $ma){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
-    $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
-            VALUES ( :name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':name', $n);
-    $stmt->bindParam(':year', $y);
-    $stmt->bindParam(':length', $l);
-    $stmt->bindParam(':description', $d);
-    $stmt->bindParam(':director', $di);
-    $stmt->bindParam(':id_category', $c);
-    $stmt->bindParam(':image', $i);
-    $stmt->bindParam(':trailer', $t);
-    $stmt->bindParam(':min_age', $ma);
+function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age) {
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
+                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':year', $year);
+        $stmt->bindParam(':length', $length);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':director', $director);
+        $stmt->bindParam(':id_category', $id_category);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':trailer', $trailer);
+        $stmt->bindParam(':min_age', $min_age);
 
-    $stmt->execute();
+        $stmt->execute();
 
-    $res = $stmt->rowCount(); 
-    return $res;
+        return $stmt->rowCount(); // Retourne le nombre de lignes affectées
+    } catch (PDOException $e) {
+        error_log("Erreur SQL : " . $e->getMessage());
+        return 0; // Retourne 0 en cas d'erreur
+    }
 }
 
 // function addMovie($titre, $real, $annee, $duree, $des, $cat, $img, $url, $age) {

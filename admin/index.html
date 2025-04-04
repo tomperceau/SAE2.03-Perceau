@@ -77,17 +77,32 @@
       window.C = {};
 
       C.handlerAddMovie = async function () {
+    let form = document.querySelector(".addMovie__form");
+    let fd = new FormData(form);
 
-        let form = document.querySelector(".addMovie__form");
-        let fd = new FormData(form);
-        let res = await DataMovie.addMovie(fd);
-        if(res){
-        V.renderLog("Film ajouté avec succès");
-      } else {
-        V.renderLog("Erreur lors de l'ajout du film");
-
+    // Vérification des champs
+    let isEmpty = false;
+    form.querySelectorAll("input").forEach(input => {
+        if (!input.value.trim()) {
+            isEmpty = true;
         }
-      }
+    });
+
+    if (isEmpty) {
+        V.renderLog("Erreur lors de l'ajout du film : tous les champs doivent être remplis.");
+        return;
+    }
+
+    // Envoi des données au serveur
+    let res = await DataMovie.addMovie(fd);
+
+    // Affichage du message en fonction de la réponse du serveur
+    if (res.success) {
+        V.renderLog("Le film a été ajouté avec succès.");
+    } else {
+        V.renderLog("Erreur lors de l'ajout du film : tous les champs doivent être remplis.");
+    }
+};
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
