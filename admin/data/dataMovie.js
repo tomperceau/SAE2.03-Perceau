@@ -3,10 +3,10 @@ let HOST_URL = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau";
 
 let DataMovies = {}; // Déclaration de l'objet avant de l'utiliser
 
-DataMovies.addMovies = async function (fmovies) {
+DataMovies.addmovies = async function (fdata) {
     let config = {
         method: "POST",
-        body: fmovies
+        body: fdata
     };
     let answer = await fetch(HOST_URL + "/server/script.php?todo=addmovies", config);
     let movies = await answer.json();

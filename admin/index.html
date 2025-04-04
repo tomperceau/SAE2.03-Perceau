@@ -18,11 +18,16 @@
 
       window.C = {};
 
-      C.handlerUpdate = async function(){
+      C.handlerAddMovie = async function(){
         let form = document.querySelector('.form');
         let fd = new FormData(form);
-        let res = await DataMovies.update(fd);
-        V.renderLog(res);
+
+        try{
+          let res = await DataMovies.addMovie(fd);
+          V.renderLog(res.message || "Film ajouté avec succès");
+        }catch (error){
+          V.renderLog("Erreur lors de l'ajout du film : " + error.message);
+        }
       }
 
       C.start = function () {

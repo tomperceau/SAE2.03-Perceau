@@ -10,7 +10,7 @@ MovieForm.format = function(head, handler){
     html = html.replace('{{head}}', head);
     html = html.replace('{{handler}}', handler);
     return html;
-}
+};
 
 
 export {MovieForm};
