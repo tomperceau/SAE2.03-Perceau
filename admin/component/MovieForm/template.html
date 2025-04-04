@@ -1,20 +1,29 @@
 <div class="addMovie">
-    <h1 class="addMovie__title">Ajouter un film</h1>
-    <form class="addMovie__form">
+        <div class="addMovie-content">
+            <h1 class="addMovie-content__title">Ajouter un film</h1>
+            <form class="addMovie-content__form">
 
-            <input required class="addMovie__form-group" type="text"  name="name" id="name" placeholder="Nom du film">
-            <input required class="addMovie__form-group" type="text" name="director" id="director" placeholder="Nom du réalisateur">
-            <input required class="addMovie__form-group" type="number"  name="year" id="year" placeholder="Année de sortie">    
-            <input required class="addMovie__form-group" type="number"  name="length" id="length" placeholder="Durée du film">
-            <input required class="addMovie__form-group" type="text"  name="description" id="description" placeholder="Description">
-            <input required class="addMovie__form-group" type="number"  name="id_category" id="id_category" placeholder="Catégorie">
-            <input required class="addMovie__form-group" type="text" name="image" id="image" placeholder="Nom du fichier de l'affiche">
-       
-            <input required class="addMovie__form-group" type="text" name="trailer" id="trailer" placeholder="URL de la bande annonce">
-       
-            <input required class="addMovie__form-group" type="number" name="min_age" id="min_age" placeholder="Age minimum">
-        <input onclick="{{handler}}" class="addMovie__form-button" type="button" value="Ajouter" name="todo">
-    </form>
+                <input required class="addMovie-content__form-group" type="text" name="name" id="name"
+                    placeholder="Nom du film">
+                <input required class="addMovie-content__form-group" type="text" name="director" id="director"
+                    placeholder="Nom du réalisateur">
+                <input required class="addMovie-content__form-group" type="number" name="year" id="year"
+                    placeholder="Année de sortie">
+                <input required class="addMovie-content__form-group" type="number" name="length" id="length"
+                    placeholder="Durée du film">
+                <input required class="addMovie-content__form-group" type="text" name="description" id="description"
+                    placeholder="Description">
+                <input required class="addMovie-content__form-group" type="number" name="id_category" id="id_category"
+                    placeholder="Catégorie">
+                <input required class="addMovie-content__form-group" type="text" name="image" id="image"
+                    placeholder="Nom du fichier de l'affiche">
+
+                <input required class="addMovie-content__form-group" type="text" name="trailer" id="trailer"
+                    placeholder="URL de la bande annonce">
+
+                <input required class="addMovie-content__form-group" type="number" name="min_age" id="min_age"
+                    placeholder="Age minimum">
+                <input onclick="{{handler}}" class="addMovie-content__form-button" type="button" value="Ajouter" name="todo">
+            </form>
+        </div>
 </div>
-
-
