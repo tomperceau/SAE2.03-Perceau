@@ -27,15 +27,15 @@ function addMoviesController(){
     */
     $name = $_REQUEST['name'];
     $year = $_REQUEST['year'];
-    $lengh = $_REQUEST['lengh'];
+    $length = $_REQUEST['length$length'];
     $description = $_REQUEST['description'];
     $director = $_REQUEST['director'];
-    $category = $_REQUEST['category'];
+    $id_category = $_REQUEST['id_category'];
     $image = $_REQUEST['image'];
     $trailer = $_REQUEST['trailer'];
     $min_age = $_REQUEST['min_age'];
     // Mise à jour du menu à l'aide de la fonction updateMenu décrite dans model.php
-    $ok = addMovies($name, $year, $lengh, $description, $director, $category, $image, $trailer, $min_age);
+    $ok = addMovies($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
     // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
     if ($ok!=0){
       return "Film ajouté à la base de donnée";
