@@ -1,16 +1,30 @@
 
-let templateFile = await fetch('./component/MovieForm/template.html');
-let template = await templateFile.text();
+// let templateFile = await fetch('./component/MovieForm/template.html');
+// let template = await templateFile.text();
 
+
+// let MovieForm = {};
+
+// MovieForm.format = function( handler){
+//     let html= template;
+//     html = html.replace('{{handler}}', handler);
+//     return html;
+// };
+
+
+// export {MovieForm};
+
+
+
+let templateFile = await fetch("./component/MovieForm/template.html");
+let template = await templateFile.text();
 
 let MovieForm = {};
 
-MovieForm.format = function(head, handler){
-    let html= template;
-    html = html.replace('{{head}}', head);
-    html = html.replace('{{handler}}', handler);
-    return html;
+MovieForm.format = function () {
+  let html = template;
+  html = html.replace('{{windows.C.handleraddMovie()}}', "windows.C.handleraddMovie()");
+  return html;
 };
 
-
-export {MovieForm};
+export { MovieForm };

@@ -33,15 +33,11 @@ function getAllMovies(){
     return $res; // Retourne les résultats
 }
 
-function addMovies($n, $y, $l, $d, $di, $c, $i, $t, $ma){
-    // Connexion à la base de données
+function addMovie($n, $y, $l, $d, $di, $c, $i, $t, $ma){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD); 
-    // Requête SQL de mise à jour du menu avec des paramètres
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age) 
             VALUES ( :name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
-    // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
-    // Lie les paramètres aux valeurs
     $stmt->bindParam(':name', $n);
     $stmt->bindParam(':year', $y);
     $stmt->bindParam(':length', $l);
@@ -51,9 +47,34 @@ function addMovies($n, $y, $l, $d, $di, $c, $i, $t, $ma){
     $stmt->bindParam(':image', $i);
     $stmt->bindParam(':trailer', $t);
     $stmt->bindParam(':min_age', $ma);
-    // Exécute la requête SQL
+
     $stmt->execute();
-    // Récupère le nombre de lignes affectées par la requête
+
     $res = $stmt->rowCount(); 
-    return $res; // Retourne le nombre de lignes affectées
+    return $res;
 }
+
+// function addMovie($titre, $real, $annee, $duree, $des, $cat, $img, $url, $age) {
+//     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+//     $sql = "REPLACE INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age) 
+//             VALUES (:titre, :realisateur, :annee, :duree, :desc, :categorie, :image, :url, :age)";
+
+//     $stmt = $cnx->prepare($sql);
+
+//     $stmt->bindParam(':titre', $titre);
+//     $stmt->bindParam(':realisateur', $real);
+//     $stmt->bindParam(':annee', $annee);
+//     $stmt->bindParam(':duree', $duree);
+//     $stmt->bindParam(':desc', $des);
+//     $stmt->bindParam(':categorie', $cat);
+//     $stmt->bindParam(':image', $img);
+//     $stmt->bindParam(':url', $url);
+//     $stmt->bindParam(':age', $age);
+
+//     $stmt->execute();
+//     $res = $stmt->rowCount();
+//     return $res; // Retourne le nombre de lignes affectées par l'opération
+// }
+
+

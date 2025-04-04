@@ -1,18 +1,79 @@
-<div class="form-container">
-    <h1 class="form-container__title">{{head}}</h1>
-    <form class="form">
+<div class="addMovie">
+    <h1 class="addMovie__title">Ajouter un film</h1>
+    <form class="addMovie__form">
 
-            <input class="form__input" type="text"  name="name" id="name" placeholder="Nom du film">
-            <input class="form__input" type="text" name="director" id="director" placeholder="Nom du réalisateur">
-            <input class="form__input" type="number"  name="year" id="year" placeholder="Année de sortie">    
-            <input class="form__input" type="text"  name="lengh" id="lengh" placeholder="Durée du film">
-            <input class="form__input" type="text"  name="description" id="description" placeholder="Description">
-            <input class="form__input" type="text"  name="category" id="category" placeholder="Catégorie">
-            <input class="form__input" type="text" name="image" id="image" placeholder="Nom du fichier de l'affiche">
+            <input required type="text"  name="name" id="name" placeholder="Nom du film">
+            <input required type="text" name="director" id="director" placeholder="Nom du réalisateur">
+            <input required type="text"  name="year" id="year" placeholder="Année de sortie">    
+            <input required type="text"  name="length" id="length" placeholder="Durée du film">
+            <input required type="text"  name="description" id="description" placeholder="Description">
+            <input required type="text"  name="id_category" id="id_category" placeholder="Catégorie">
+            <input required type="text" name="image" id="image" placeholder="Nom du fichier de l'affiche">
        
-            <input class="form__input" type="text" name="trailer" id="trailer" placeholder="URL de la bande annonce">
+            <input required type="text" name="trailer" id="trailer" placeholder="URL de la bande annonce">
        
-            <input class="form__input" type="text" name="min_age" id="min_age" placeholder="Age minimum">
-        <input onclick="{{handler}}" class="form__button" type="button" value="Ajouter" name="todo">
+            <input required type="text" name="min_age" id="min_age" placeholder="Age minimum">
+        <input onclick="{{windows.C.handleraddMovie()}}" class="form__button" type="button" value="Ajouter" name="todo">
     </form>
 </div>
+
+
+<!-- <div class="addFilm">
+    <h4 class="addFilm__title">Modifier les films</h4>
+    <form class="addFilm__form">
+      <input required type="text" name="titre" placeholder="Saisir un titre" />
+      <input
+        required
+        type="text"
+        name="realisateur"
+        placeholder="Saisir un réalisateur"
+      />
+      <input required type="number" name="annee" placeholder="Saisir une année" />
+  
+      <input
+        required
+        type="number"
+        name="duree"
+        placeholder="Saisir une durée (en minutes)"
+      />
+  
+      <input
+        required
+        type="text"
+        name="desc"
+        placeholder="Saisir une description"
+      />
+      <input
+        required
+        type="text"
+        name="categorie"
+        placeholder="Saisir une catégorie"
+      />
+      <input
+        required
+        type="text"
+        name="image"
+        placeholder="Saisir le nom d'une image et son extension"
+      />
+      <input
+        required
+        type="text"
+        name="url"
+        placeholder="Saisir l'url du trailer"
+      />
+      <input
+        required
+        type="number"
+        name="age"
+        placeholder="Saisir les restrictions d'âge"
+      />
+  
+      <input
+        onclick="{{handler}}"
+        type="button"
+        value="Ajouter un film"
+        name="todo"
+      />
+    </form>
+  </div>
+   -->

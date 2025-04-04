@@ -1,3 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <section id="log"></section>
+    <section id="addFilm"></section>
+
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { MovieForm } from "./component/MovieForm/script.js";
+
+      window.C = {};
+
+      C.handlerAdd = async function(){
+        let form = document.querySelector('.addFilm__form');
+        let fd = new FormData(form);
+
+        console.log("fd", fd);
+        let res = await DataMovie.add(fd);
+        console.log("add effectué");
+        V.renderLog(res);
+      }
+
+      C.start = function () {
+        V.renderLog("En attente de l'ajout d'un film");
+        V.renderForm("C.handlerAdd()");
+      };
+
+
+    
+
+
+      window.V = {};
+
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+
+      };
+
+      
+      V.renderForm = function (handler){
+      let content = document.querySelector("#addFilm");
+      content.innerHTML = MovieForm.format(handler);
+    }
+
+      C.start();
+    </script>
+  </body>
+</html> -->
+
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -8,51 +66,47 @@
   </head>
   <body>
     <section id="log"></section>
-    <section id="addMovie"></section>
+    <section class="addMovie" id="content"></section>
 
     <script type="module">
+      // Importation des modules
       import { Log } from "./component/Log/script.js";
-
-      import { DataMovies } from "./data/dataMovie.js";
       import { MovieForm } from "./component/MovieForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
 
       window.C = {};
 
-      C.handlerAddMovie = async function(){
-        let form = document.querySelector('.form');
-        let fd = new FormData(form);
+      C.handlerAddMovie = async function () {
 
-        try{
-          let res = await DataMovies.addMovie(fd);
-          V.renderLog(res.message || "Film ajouté avec succès");
-        }catch (error){
-          V.renderLog("Erreur lors de l'ajout du film : " + error.message);
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.addMovie(fd);
+        if(res){
+        V.renderLog("Film ajouté avec succès");
+      } else {
+        V.renderLog("Erreur lors de l'ajout du film");
+
         }
       }
 
       C.start = function () {
-        V.renderLog("En attente de l'ajout d'un film");
-        V.renderMovieForm("En attente de l'ajout d'un film");
+        V.renderLog("Démarrage de l'application");
+        V.renderForm("C.handlerAddMovie()");
       };
-
-      C.getMovieForm = async function () {
-      let data = await DataMovies.requestMovies();
-    }
-
 
       window.V = {};
 
+      // Render du Log
       V.renderLog = function (txt) {
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
-      
       };
 
-      
-      V.renderMovieForm = function (handler){
-      let content = document.querySelector("#addMovie");
-      content.innerHTML = MovieForm.format(handler);
-    }
+      // Render du 
+      V.renderForm = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieForm.format(handler);
+      };
 
       C.start();
     </script>

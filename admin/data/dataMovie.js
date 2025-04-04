@@ -1,17 +1,37 @@
-// URL où se trouve le répertoire "server" sur mmi.unilim.fr
+
 let HOST_URL = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau";
 
-let DataMovies = {}; // Déclaration de l'objet avant de l'utiliser
+let DataMovie = {}; 
 
-DataMovies.addmovies = async function (fdata) {
+// DataMovie.add = async function (fdata) {
+//     let config = {
+//       method: "POST",
+//     };
+//     let answer = await fetch(
+//       HOST_URL + "/server/script.php?todo=addMovie",
+//       config
+//     );
+//     let data = await answer.json();
+//     return data;
+//   };
+
+
+  DataMovie.addMovie = async function (fdata) {
     let config = {
-        method: "POST",
-        body: fdata
+      method: "POST", // méthode HTTP à utiliser
+      body: fdata, // données à envoyer sous forme d'objet FormData
     };
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=addmovies", config);
-    let movies = await answer.json();
-    return movies;
-};
+    let answer = await fetch(
+      HOST_URL + "/server/script.php?todo=addMovie",
+      config
+    );
+    let data = await answer.json();
+    return data;
+  };
 
-export { DataMovies };
+
+
+
+
+export { DataMovie };
 
