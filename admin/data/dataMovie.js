@@ -21,6 +21,5 @@ let DataMovie = {};
 
 
 
-
 export { DataMovie };
 

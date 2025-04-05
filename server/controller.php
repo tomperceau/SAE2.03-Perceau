@@ -49,3 +49,9 @@ function addController() {
   
   exit();
 }
+
+
+function readMovieDetailController(){
+    $moviedetail = getMovieDetail();
+    return $moviedetail;
+}
