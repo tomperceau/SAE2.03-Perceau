@@ -51,7 +51,33 @@ function addController() {
 }
 
 
-function readMovieDetailController(){
-    $moviedetail = getMovieDetail();
-    return $moviedetail;
-}
+// function readMovieDetailController() {
+//     if (!isset($_REQUEST['id'])) {
+//         http_response_code(400); // 400 = Bad Request
+//         echo json_encode(["success" => false, "message" => "ID manquant"]);
+//         return false;
+//     }
+
+//     $id = $_REQUEST['id'];
+//     $moviedetail = getMovieDetail($id);
+
+//     if (!$moviedetail || count($moviedetail) === 0) {
+//         http_response_code(404); // 404 = Not Found
+//         echo json_encode(["success" => false, "message" => "Film non trouvé"]);
+//         return false;
+//     }
+
+
+    function readMovieDetailController(){
+        // Récupération des paramètres de la requête
+        // On utilise l'opérateur de coalescence nulle (??) pour assigner une valeur par défaut si la clé n'existe pas
+        $id = $_REQUEST['id'] ?? null;
+      
+        if (empty($id)) {
+            return "Erreur : Tous les champs doivent être remplis.";
+        }
+      
+        return getMovieDetail($id);
+      }
+
+
