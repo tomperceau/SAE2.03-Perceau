@@ -11,36 +11,58 @@
 <body>
   <header id="header"></header>
 
+  <section class="moviedetail" id="infos"></section>
   <section  class="cards" id="content"></section>
 
   <script type="module">
-    import { NavBar } from "./component/NavBar/script.js";
-
+    
     import { DataMovie } from "./data/dataMovie.js";
+    import { NavBar } from "./component/NavBar/script.js";
     import { Movie } from "./component/Movie/script.js";
+    import { MovieDetail } from "./component/MovieDetail/script.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
-    C.handlerAbout = function () {
-      alert(
-        "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-      );
-    };
+      // On applelle la fonction handlerMovies lorsqu'on clique sur le bouton "Films"
+      C.handlerMovies = function () {
+        C.getMovie(); // on fait appelle à C.getMovie() qu'on a défini plus bas
+      };
+
+      C.handlerDetail = async function (id) {
+        console.log("ID reçu :", id); // debug
+
+        let details = await DataMovie.requestMovieDetail(id);
+        console.log("Détails du film :", details); // debug
+        V.renderMovieDetail(details[0]);
+      };
 
     C.start = function () {
       V.renderNavBar("C.handlerAbout()");
       C.getMovie();
     };
 
+
+
+
+
+
+
     C.getMovie = async function () {
-      let data = await DataMovie.requestMovies();
-      V.renderMovie(data);
-    }
+        // Efface la fiche détail s’il y en a une
+        let infosSection = document.querySelector("#infos");
+        infosSection.innerHTML = "";
+        // infosSection.style.display = "none";
 
+        // Recharge les films
+        let data = await DataMovie.requestMovies();
+        V.renderMovie(data);
 
+        // Remonte en haut de la page avec une animation fluide
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -61,6 +83,16 @@
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
     }
+
+
+    V.renderMovieDetail = function (data) {
+        if (!data) return; // Si data est vide, on ne fait rien
+
+        let content = document.querySelector("#infos");
+        content.innerHTML = MovieDetail.format(data);
+        console.log(MovieDetail.format(data));
+      };
+
 
     C.start(); // Démarre l'application
   </script>
