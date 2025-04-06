@@ -40,12 +40,14 @@
       };
 
     C.start = function () {
-      V.renderNavBar("C.handlerAbout()");
+      V.renderNavBar("C.handlerMovies()");
       C.getMovie();
     };
 
 
-
+    C.handlerMovies = function () {
+  C.getMovie(); // Recharge la liste des films
+};
 
 
 
