@@ -70,6 +70,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+
     C.filterByCategory = async function (id_category) {
     // Efface la fiche détail s’il y en a une
     let infosSection = document.querySelector("#infos");
@@ -85,6 +86,7 @@
         V.renderMovie(data); // Affiche les films
     }
 };
+
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -126,6 +128,8 @@ V.renderNoMoviesMessage = function () {
         </div>
     `;
 };
+
+
     C.start(); // Démarre l'application
   </script>
 </body>

@@ -17,3 +17,14 @@
     margin-top: 2rem;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.category-section {
+  margin-bottom: 2rem;
+}
+
+.category-section h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
