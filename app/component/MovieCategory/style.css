@@ -1,7 +1,7 @@
 .category {
     margin: 1rem 0;
     font-size: 1rem;
-    color: #ffffff;
+    color: black;
   }
   
   .category select {
@@ -19,12 +19,24 @@
 }
 
 .category-section {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column; /* Aligne les catégories verticalement */
+  width: 100%; /* Chaque catégorie occupe toute la largeur */
+  margin-bottom: 2rem; /* Espacement entre les catégories */
+
 }
 
 .category-section h2 {
   font-size: 1.5rem;
   color: #ffffff;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left; /* Aligne le titre à gauche */
+  padding-left: 1rem;
+}
+
+
+
+div{
+  display: flex;
+  gap: 2rem;
 }

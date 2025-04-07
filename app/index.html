@@ -72,21 +72,38 @@
 
 
     C.filterByCategory = async function (id_category) {
-    // Efface la fiche détail s’il y en a une
-    let infosSection = document.querySelector("#infos");
-    infosSection.innerHTML = "";
+  // Efface la fiche détail s’il y en a une
+  let infosSection = document.querySelector("#infos");
+  infosSection.innerHTML = "";
 
+  if (id_category === "") {
+    // Si aucune catégorie n'est sélectionnée, récupère tous les films
+    let data = await DataMovie.requestMovies();
+    let groupedMovies = C.groupMoviesByCategory(data);
+    MovieCategory.renderGroupedMovies(groupedMovies); // Affiche les films triés par catégorie
+  } else {
     // Récupère les films de la catégorie sélectionnée
     let data = await DataMovie.requestMoviesByCategory(id_category);
 
     // Vérifie si la catégorie contient des films
     if (data.length === 0) {
-        V.renderNoMoviesMessage(); // Affiche un message si aucun film
+      V.renderNoMoviesMessage(); // Affiche un message si aucun film
     } else {
-        V.renderMovie(data); // Affiche les films
+      V.renderMovie(data); // Affiche les films
     }
+  }
 };
-
+// Fonction pour regrouper les films par catégorie
+C.groupMoviesByCategory = function (movies) {
+  let grouped = {};
+  movies.forEach((movie) => {
+    if (!grouped[movie.category_name]) {
+      grouped[movie.category_name] = [];
+    }
+    grouped[movie.category_name].push(movie);
+  });
+  return grouped;
+};
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -111,7 +128,7 @@
     V.renderMovieDetail = function (data) {
       if (!data) return; // Si data est vide, on ne fait rien
 
-      let content = document.querySelector("#infos");
+      let content = document.querySelector("#content");
       content.innerHTML = MovieDetail.format(data);
       console.log(MovieDetail.format(data));
     };
