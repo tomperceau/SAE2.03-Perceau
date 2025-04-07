@@ -69,6 +69,12 @@ if ( isset($_REQUEST['todo']) ){
         $data = readMovieDetailController();
         break;
 
+
+        case 'readMoviesByCategory':
+          $data = readMoviesByCategoryController();
+
+          break;
+
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
       http_response_code(400); // 400 == "Bad request"
@@ -95,6 +101,7 @@ if ( isset($_REQUEST['todo']) ){
    * par la fonction de contrôleur et encodées en JSON (json_encode).
    * On renvoie aussi un code de réponse HTTP 200 (OK) pour indiquer que la requête a été traitée avec succès.
    */
+
   echo json_encode($data);
   http_response_code(200); // 200 == "OK"
   exit();

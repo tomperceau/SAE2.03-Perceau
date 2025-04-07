@@ -12,12 +12,14 @@
   <header id="header"></header>
 
   <section class="moviedetail" id="infos"></section>
-  <section  class="cards" id="content"></section>
+  <section class="category" id="cat"></section>
+  <section class="cards" id="content"></section>
 
   <script type="module">
-    
+
     import { DataMovie } from "./data/dataMovie.js";
     import { NavBar } from "./component/NavBar/script.js";
+    import { MovieCategory } from "./component/MovieCategory/script.js";
     import { Movie } from "./component/Movie/script.js";
     import { MovieDetail } from "./component/MovieDetail/script.js";
 
@@ -26,46 +28,63 @@
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
-      // On applelle la fonction handlerMovies lorsqu'on clique sur le bouton "Films"
-      C.handlerMovies = function () {
-        C.getMovie(); // on fait appelle à C.getMovie() qu'on a défini plus bas
-      };
+    // On applelle la fonction handlerMovies lorsqu'on clique sur le bouton "Films"
+    C.handlerMovies = function () {
+      C.getMovie(); // on fait appelle à C.getMovie() qu'on a défini plus bas
+    };
 
-      C.handlerDetail = async function (id) {
-        console.log("ID reçu :", id); // debug
+    C.handlerDetail = async function (id) {
+      console.log("ID reçu :", id); // debug
 
-        let details = await DataMovie.requestMovieDetail(id);
-        console.log("Détails du film :", details); // debug
-        V.renderMovieDetail(details[0]);
-      };
+      let details = await DataMovie.requestMovieDetail(id);
+      console.log("Détails du film :", details); // debug
+      V.renderMovieDetail(details[0]);
+    };
 
     C.start = function () {
       V.renderNavBar("C.handlerMovies()");
+      V.renderCategory(); // Ajout pour afficher le sélecteur de catégories
+
       C.getMovie();
     };
 
 
     C.handlerMovies = function () {
-  C.getMovie(); // Recharge la liste des films
-};
+      C.getMovie(); // Recharge la liste des films
+    };
 
 
 
 
     C.getMovie = async function () {
-        // Efface la fiche détail s’il y en a une
-        let infosSection = document.querySelector("#infos");
-        infosSection.innerHTML = "";
-        // infosSection.style.display = "none";
+      // Efface la fiche détail s’il y en a une
+      let infosSection = document.querySelector("#infos");
+      infosSection.innerHTML = "";
+      // infosSection.style.display = "none";
 
-        // Recharge les films
-        let data = await DataMovie.requestMovies();
-        V.renderMovie(data);
+      // Recharge les films
+      let data = await DataMovie.requestMovies();
+      V.renderMovie(data);
 
-        // Remonte en haut de la page avec une animation fluide
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
+      // Remonte en haut de la page avec une animation fluide
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
+    C.filterByCategory = async function (id_category) {
+    // Efface la fiche détail s’il y en a une
+    let infosSection = document.querySelector("#infos");
+    infosSection.innerHTML = "";
+
+    // Récupère les films de la catégorie sélectionnée
+    let data = await DataMovie.requestMoviesByCategory(id_category);
+
+    // Vérifie si la catégorie contient des films
+    if (data.length === 0) {
+        V.renderNoMoviesMessage(); // Affiche un message si aucun film
+    } else {
+        V.renderMovie(data); // Affiche les films
+    }
+};
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
@@ -81,21 +100,32 @@
       header.innerHTML = NavBar.format(hAbout);
     };
 
-    V.renderMovie = function (data){
+    V.renderMovie = function (data) {
       let content = document.querySelector("#content");
       content.innerHTML = Movie.format(data);
     }
 
 
     V.renderMovieDetail = function (data) {
-        if (!data) return; // Si data est vide, on ne fait rien
+      if (!data) return; // Si data est vide, on ne fait rien
 
-        let content = document.querySelector("#infos");
-        content.innerHTML = MovieDetail.format(data);
-        console.log(MovieDetail.format(data));
-      };
+      let content = document.querySelector("#infos");
+      content.innerHTML = MovieDetail.format(data);
+      console.log(MovieDetail.format(data));
+    };
 
-
+    V.renderCategory = function () {
+  let categorySection = document.querySelector("#cat");
+  categorySection.innerHTML = MovieCategory.format();
+};
+V.renderNoMoviesMessage = function () {
+    let content = document.querySelector("#content");
+    content.innerHTML = `
+        <div class="no-movies-message">
+            Aucun film pour le moment.
+        </div>
+    `;
+};
     C.start(); // Démarre l'application
   </script>
 </body>

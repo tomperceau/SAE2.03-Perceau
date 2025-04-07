@@ -74,3 +74,16 @@ function getMovieDetail($id){
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $res; // Retourne les résultats
     }
+
+    function getMoviesByCategory($id_category) {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT Movie.id, Movie.name, image 
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id 
+            WHERE Movie.id_category = :id_category";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_category', $id_category, PDO::PARAM_INT);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }

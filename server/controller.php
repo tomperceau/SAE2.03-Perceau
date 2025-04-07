@@ -51,21 +51,6 @@ function addController() {
 }
 
 
-// function readMovieDetailController() {
-//     if (!isset($_REQUEST['id'])) {
-//         http_response_code(400); // 400 = Bad Request
-//         echo json_encode(["success" => false, "message" => "ID manquant"]);
-//         return false;
-//     }
-
-//     $id = $_REQUEST['id'];
-//     $moviedetail = getMovieDetail($id);
-
-//     if (!$moviedetail || count($moviedetail) === 0) {
-//         http_response_code(404); // 404 = Not Found
-//         echo json_encode(["success" => false, "message" => "Film non trouvé"]);
-//         return false;
-//     }
 
 
     function readMovieDetailController(){
@@ -81,3 +66,15 @@ function addController() {
       }
 
 
+      function readMoviesByCategoryController() {
+        $id_category = $_REQUEST['id_category'] ?? null;
+    
+        if (empty($id_category)) {
+            http_response_code(400); // 400 = Bad Request
+            echo json_encode(["success" => false, "message" => "ID catégorie manquant"]);
+            return false;
+        }
+    
+        $movies = getMoviesByCategory($id_category);
+        return $movies;
+    }
