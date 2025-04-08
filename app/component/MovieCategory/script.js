@@ -14,5 +14,26 @@ MovieCategory.format = function () {
   return html;
 };
 
+MovieCategory.renderGroupedMovies = function (groupedMovies) {
+  let content = document.querySelector("#content");
+  content.innerHTML = ""; // Efface le contenu précédent
+
+  for (let category in groupedMovies) {
+    let categorySection = document.createElement("div");
+    categorySection.classList.add("category-section");
+
+    let categoryTitle = document.createElement("h2");
+    categoryTitle.textContent = category;
+    categorySection.appendChild(categoryTitle);
+
+    let moviesHtml = Movie.format(groupedMovies[category]);
+    let moviesContainer = document.createElement("div");
+    moviesContainer.innerHTML = moviesHtml;
+    categorySection.appendChild(moviesContainer);
+
+    content.appendChild(categorySection);
+  }
+};
+
 
 export { MovieCategory };
