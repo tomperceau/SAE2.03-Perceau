@@ -1,9 +1,9 @@
 .moviedetail {
 
-    background-color: #3C3C3C;
+
     font-family: Arial, Helvetica, sans-serif;
     color: #C5C5C5;
-    padding: 2rem;
+
   }
   
   .moviedetail__title {
@@ -67,6 +67,8 @@
   }
   
   .moviedetail__trailer {
+    display: flex;
+    justify-content: center;
     margin-top: 2rem;
     width: 100%;
     max-width: 100%;
