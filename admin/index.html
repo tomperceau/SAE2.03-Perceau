@@ -10,6 +10,7 @@
   </head>
   <body>
     <section id="log"></section>
+    <section id="addProfile"></section>
     <section class="addMovie" id="content"></section>
 
     <script type="module">
@@ -17,40 +18,34 @@
       import { Log } from "./component/Log/script.js";
       import { MovieForm } from "./component/MovieForm/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      import { ProfileForm } from "./component/ProfileForm/script.js";
 
       window.C = {};
+
+
+      C.handlerAddProfile = async function () {
+        let form = document.querySelector(".addProfile-content__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.add(fd);
+        V.renderLog(res);
+      };
 
       C.handlerAddMovie = async function () {
     let form = document.querySelector(".addMovie-content__form");
     let fd = new FormData(form);
-
-    // Vérification des champs
-    let isEmpty = false;
-    form.querySelectorAll("input").forEach(input => {
-        if (!input.value.trim()) {
-            isEmpty = true;
-        }
-    });
-
-    if (isEmpty) {
-        V.renderLog("Erreur lors de l'ajout du film : tous les champs doivent être remplis.");
-        return;
-    }
-
-    // Envoi des données au serveur
     let res = await DataMovie.addMovie(fd);
+    V.renderLog(res);
 
-    // Affichage du message en fonction de la réponse du serveur
-    if (res.success) {
-        V.renderLog("Le film a été ajouté avec succès.");
-    } else {
-        V.renderLog("Erreur lors de l'ajout du film : tous les champs doivent être remplis.");
-    }
+
+
+
 };
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderForm("C.handlerAddMovie()");
+        V.renderAddProfileForm("C.handlerAddProfile()");
       };
 
       window.V = {};
@@ -66,7 +61,10 @@
         let content = document.querySelector("#content");
         content.innerHTML = MovieForm.format(handler);
       };
-
+      V.renderAddProfileForm = function (handler) {
+        let content = document.querySelector("#addProfile");
+        content.innerHTML = ProfileForm.format(handler);
+      };
       C.start();
     </script>
   </body>
