@@ -21,7 +21,7 @@ define("DBPWD", "perceau1");
 
 function getAllMovies() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, Movie.image, Category.name AS category_name 
+    $sql = "SELECT Movie.id, Movie.name, Movie.image, Movie.min_age, Category.name AS category_name 
             FROM Movie 
             INNER JOIN Category ON Movie.id_category = Category.id";
     $stmt = $cnx->prepare($sql);
@@ -97,3 +97,14 @@ function getMovieDetail($id){
       
         return ["success" => true];
       }
+
+      function getProfile() {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+        $sql = "SELECT id, name, image, datenaissance FROM User";
+
+        $stmt = $cnx->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    }

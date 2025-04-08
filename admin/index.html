@@ -10,8 +10,8 @@
   </head>
   <body>
     <section id="log"></section>
-    <section id="addProfile"></section>
-    <section class="addMovie" id="content"></section>
+    <section  id="addProfile"></section>
+    <section  id="content"></section>
 
     <script type="module">
       // Importation des modules
@@ -19,6 +19,7 @@
       import { MovieForm } from "./component/MovieForm/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfile } from "./data/dataProfile.js";
+
       import { ProfileForm } from "./component/ProfileForm/script.js";
 
       window.C = {};
@@ -36,9 +37,6 @@
     let fd = new FormData(form);
     let res = await DataMovie.addMovie(fd);
     V.renderLog(res);
-
-
-
 
 };
 
