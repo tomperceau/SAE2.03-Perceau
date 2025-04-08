@@ -114,16 +114,6 @@
         C.getMovie(); // Recharge la liste des films
       };
 
-      C.handlerProfile = async function () {
-        let select = document.querySelector("#profile-select");
-        let selectedProfileId = select.value;
-        if (selectedProfileId) {
-          console.log("Profil sélectionné :", selectedProfileId);
-          // Stockez l'ID du profil actif dans une variable globale
-          window.activeProfileId = selectedProfileId;
-          // Vous pouvez ajouter ici des actions spécifiques pour le profil sélectionné
-        }
-      };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -137,7 +127,7 @@
        */
       V.renderNavBar = function (hHome, profiles) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hHome, profiles, activeProfileId); // Passez les profils ici
+        header.innerHTML = NavBar.format(hHome, profiles); // Passez les profils ici
       };
       V.renderMovie = function (data) {
         let content = document.querySelector("#content");
