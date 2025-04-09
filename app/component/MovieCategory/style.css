@@ -1,29 +1,29 @@
-
 .movie-categories {
-  display: flex;
-  flex-direction: column;
-  margin: 30px;
-  padding: 30px 20px;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: black;
-  box-shadow: 0;
-  transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    padding: 2rem;
+    width: 90%; /* Ajuste la largeur */
+    max-width: 1200px; /* Limite la largeur maximale */
+    background-color: #2c2c2c; /* Fond sombre */
+    border-radius: 1rem; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    transition: transform 0.3s ease;
 }
 
 .movie-categories__titre {
-  padding-left: 10px;
-  margin-bottom: 25px;
-  text-align: left;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  border-left: 4px solid #d9ff00; 
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #d9ff00; /* Couleur vive pour le titre */
+    border-left: 4px solid #d9ff00; /* Barre colorée */
 }
 
 .movie-categories__movies {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Espacement entre les films */
 }

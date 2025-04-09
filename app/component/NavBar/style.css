@@ -1,54 +1,51 @@
-
-
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem; /* Uniformisez le padding */
-  color: var(--color-fg);
-  background-color: var(--color-bg);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a; /* Fond sombre */
+    color: #ffffff; /* Texte blanc */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre subtile */
 }
 
 .navbar__list {
-  display: flex;
-  list-style: none;
-  align-items: center;
-  margin: 0;
-  padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar__item {
-  padding: 0.5rem 1rem;
-  text-decoration: underline;
-  text-decoration-thickness: 0.1rem;
-  text-underline-offset: 0.2rem;
-  cursor: pointer;
-  transition: text-underline-offset 0.2s ease-in-out;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .navbar__item:hover {
-  text-underline-offset: 0.5rem;
+    color: #d9ff00; /* Couleur vive au survol */
+    text-decoration: underline;
 }
 
 .navbar-select {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .navbar__image {
-  width: 40px;
-  height: 40px;
-  border-radius: 10%;
-  object-fit: cover;
-  border: 1px solid var(--color-fg);
-  transition: transform 0.2s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Cercle parfait */
+    object-fit: cover;
+    border: 2px solid #ffffff; /* Bordure blanche */
+    transition: transform 0.3s ease;
 }
 
 .navbar__image:hover {
-  transform: scale(1.1);
+    transform: scale(1.1); /* Zoom léger au survol */
 }
