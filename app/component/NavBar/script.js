@@ -3,9 +3,9 @@ let template = await templateFile.text();
 
 let NavBar = {};
 
-NavBar.format = function (hAbout, hProfile, profiles) {
+NavBar.format = function (hHome, hProfile, profiles) {
   let html = template;
-  html = html.replace("{{hAbout}}", hAbout);
+  html = html.replace("{{hHome}}", hHome);
   html = html.replace("{{handler}}", hProfile);
 
   let profile = "";
