@@ -6,16 +6,16 @@
   padding: 30px 20px;
   width: 100%;
   box-sizing: border-box;
-  background-color: grey;
+  background-color: black;
+  box-shadow: 0;
   transition: transform 0.3s ease;
-
 }
 
 .movie-categories__titre {
   padding-left: 10px;
   margin-bottom: 25px;
   text-align: left;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #ffffff;
   border-left: 4px solid #d9ff00; 
@@ -25,5 +25,5 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem;
 }

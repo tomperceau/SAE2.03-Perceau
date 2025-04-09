@@ -10,13 +10,15 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-  }
+}
+
 
   .movie-card {
     position: relative;
     width: 16.875rem; /* Ajustez selon vos besoins */
     height: 25.938; /* Ajustez selon vos besoins */
     overflow: hidden;
+border-radius: 2rem;
     cursor: pointer;
 }
 
