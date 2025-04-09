@@ -80,7 +80,7 @@ function addProfileController(){
 
 
       function readProfileController() {
-        $profiles = getProfile();
+        $profiles = readProfile();
         return $profiles;
     }
 

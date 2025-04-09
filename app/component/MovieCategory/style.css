@@ -1,3 +1,5 @@
+
+
 .category {
   display: flex;
   align-items: center;
@@ -5,8 +7,9 @@
   background-color: #3C3C3C;
   color: #ffffff;
   font-size: 1.5rem;
-  padding: 1rem 2rem 1rem 2rem;
-
+  padding: 1rem; /* Uniformisez le padding */
+  width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
 .category_title {
@@ -57,3 +60,4 @@
   /* Aligne le titre à gauche */
   padding-left: 1rem;
 }
+

@@ -98,13 +98,15 @@ function getMovieDetail($id){
         return ["success" => true];
       }
 
-      function getProfile() {
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+function readProfile() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, image, datenaissance FROM User";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $profiles = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        $sql = "SELECT id, name, image, datenaissance FROM User";
 
-        $stmt = $cnx->prepare($sql);
-        $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res;
-    }
+    return $profiles;
+}
+
+

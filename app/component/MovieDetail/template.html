@@ -1,34 +1,30 @@
 <div class="moviedetail">
+  <div class="moviedetail__content">
     <h1 class="moviedetail__title">{{name}}</h1>
-  
-    <div class="moviedetail__content">
-      <div class="moviedetail__poster">
-        <img src="https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/{{image}}" alt="Affiche film" class="moviedetail__poster-img" />
+
+    <div class="moviedetail__poster">
+      <img src="https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/{{image}}" alt="Affiche film" class="moviedetail__poster-img" />
+    </div>
+
+    <div class="moviedetail__info">
+      <div class="moviedetail__meta">
+        <span class="moviedetail__year">{{year}}</span>
+        <span class="moviedetail__rating">PEGI : {{min_age}}</span>
       </div>
-  
-      <div class="moviedetail__info">
-        <div class="moviedetail__meta">
-          <span class="moviedetail__year">{{year}}</span>
-          <span class="moviedetail__rating">PEGI : {{min_age}}</span>
-        </div>
-  
-        <div class="moviedetail__director">{{director}}</div>
-        <div class="moviedetail__genres"><strong>{{id_category}}</strong></div>
-  
-        <p class="moviedetail__description">
-          {{description}}
-        </p>
-      </div>
-  
-      <div class="moviedetail__trailer">
-        <iframe
-          class="moviedetail__trailer-iframe"
-          src="{{trailer}}"
-          title="trailer"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
+      <div class="moviedetail__director">{{director}}</div>
+      <div class="moviedetail__genres"><strong>{{id_category}}</strong></div>
+      <p class="moviedetail__description">{{description}}</p>
+    </div>
+
+    <div class="moviedetail__trailer">
+      <iframe
+        class="moviedetail__trailer-iframe"
+        src="{{trailer}}"
+        title="trailer"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
+</div>
