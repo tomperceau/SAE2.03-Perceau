@@ -5,13 +5,13 @@ let NavBar = {};
 
 NavBar.format = function (hHome, hProfile, profiles) {
   let html = template;
-  html = html.replace("{{hHome}}", hHome);
-  html = html.replace("{{handler}}", hProfile);
+  html = html.replace("{{hHome}}", `${hHome}()`); // Ajoute les parenthèses pour appeler la fonction
+  html = html.replace("{{handler}}", `${hProfile}()`);
 
   let profile = "";
   for (let i = 0; i < profiles.length; i++) {
-    let p = profiles[i];
-    profile += `<option value="${p.name}" data-img="${p.image}" data-dob="${p.datenaissance}">${p.name}</option>`;
+      let p = profiles[i];
+      profile += `<option value="${p.name}" data-img="${p.image}" data-dob="${p.datenaissance}">${p.name}</option>`;
   }
 
   let image = profiles[0]?.image || "";

@@ -1,177 +1,139 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 APP</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
 
-  <body>
-    <header id="header"></header>
+<head>
+  <title>SAE2.03 APP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-    <section class="category" id="cat"></section>
-    <section class="cards" id="content"></section>
-    <section class="moviedetail" id="infos"></section>
-
-    <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
-      import { Movie } from "./component/Movie/script.js";
-      import { MovieDetail } from "./component/MovieDetail/script.js";
-      import { MovieCategory } from "./component/MovieCategory/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { DataProfile } from "./data/dataProfile.js";
-
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
-      window.C = {};
+<body>
+  <header id="header"></header>
 
 
-      C.start = async function () {
-        let profiles = await DataProfile.read();
-        V.renderNavBar("C.handlerMovies()", "C.handlerProfile()", profiles);
-        console.log("C.start");
-        V.renderCategory();
-        C.getMovie();
-      };
+
+  <section class="cards" id="content"></section>
+  <section class="movies-categories" id="category"></section>
+  <!-- <section class="moviedetail" id="content"></section> -->
+
+  <script type="module">
+    import { NavBar } from "./component/NavBar/script.js";
+    import { Movie } from "./component/Movie/script.js";
+    import { MovieDetail } from "./component/MovieDetail/script.js";
+    import { MovieCategory } from "./component/MovieCategory/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { DataProfile } from "./data/dataProfile.js";
+
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
 
 
-      C.getMovie = async function () {
-        let infosSection = document.querySelector("#infos");
-        infosSection.innerHTML = "";
-        let data = await DataMovie.requestMovies();
-        console.log("Films récupérés :", data); // Vérifiez les films récupérés
-        V.renderMovie(data);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
-
-      C.filterByCategory = async function (id_category) {
-        // Efface la fiche détail s’il y en a une
-        let infosSection = document.querySelector("#infos");
-        infosSection.innerHTML = "";
-
-        if (id_category === "") {
-          // Si aucune catégorie n'est sélectionnée, récupère tous les films
-          let data = await DataMovie.requestMovies();
-          let groupedMovies = C.groupMoviesByCategory(data);
-          MovieCategory.renderGroupedMovies(groupedMovies); // Affiche les films triés par catégorie
-        } else {
-          // Récupère les films de la catégorie sélectionnée
-          let data = await DataMovie.requestMoviesByCategory(id_category);
-
-          // Vérifie si la catégorie contient des films
-          if (data.length === 0) {
-            V.renderNoMoviesMessage(); // Affiche un message si aucun film
-          } else {
-            V.renderMovie(data); // Affiche les films
-          }
-        }
-      };
-
-      // Fonction pour regrouper les films par catégorie
-      C.groupMoviesByCategory = function (movies) {
-        let grouped = {};
-        movies.forEach((movie) => {
-          if (!grouped[movie.category_name]) {
-            grouped[movie.category_name] = [];
-          }
-          grouped[movie.category_name].push(movie);
-        });
-        return grouped;
-      };
-
-      C.changeProfile = async function (newId) {
-        newId = parseInt(newId);
-        const profiles = await DataProfile.read();
-
-        const selected = profiles.find((p) => p.id === newId);
-
-        if (selected) {
-          activeProfileId = selected.id;
-          console.log("Profil sélectionné :", selected); // Debug
-          C.getMovie();
-        }
-      };
-
-      // On applelle la fonction handlerMovies lorsqu'on clique sur le bouton "Films"
-      C.handlerDetail = async function (id) {
-        let data = await DataMovie.requestMovieDetails(id); // On récupère les données par défaut et on attend avec await
-        V.renderDetail(data); // Affiche les données
-      };
-
-      C.handlerDetail = async function (id) {
-        console.log("ID reçu :", id); // debug
-        let details = await DataMovie.requestMovieDetail(id);
-        console.log("Détails du film :", details); // debug
-        V.renderMovieDetail(details[0]);
-      };
-
-      C.handlerMovies = function () {
-        C.getMovie(); // Recharge la liste des films
-      };
-
-      C.handlerProfile = async function () {
-    const select = document.querySelector("#profile-select");
-    const selectedOption = select.selectedOptions[0];
-    const profileName = selectedOption.value;
-    const dob = selectedOption.getAttribute("data-dob");
-    const imageFilename = selectedOption.getAttribute("data-img");
-    const picture = document.querySelector("#profile-image");
-    const base = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/";
-
-    // Met à jour l'image de profil
-    picture.src = base + imageFilename;
-
-    // Récupère les films pour le profil sélectionné
-    let data = await DataMovie.requestMovies(); // Remplacez par une fonction adaptée si nécessaire
-    console.log("Films pour le profil sélectionné :", data);
-
-    // Affiche les films
-    V.renderMovie(data);
+    C.start = async function () {
+    let profiles = await DataProfile.read();
+    V.renderNavBar("C.handlerMovies", "C.handlerProfile", profiles); // Passez la référence
+    console.log("C.start");
+    let categories = await DataMovie.requestMovieCategory(); // Récupère les catégories
+    V.renderCategory(categories); // Affiche les catégories
+    C.getMovie();
 };
-      // Vue (contient tout ce qui est relatif à l'affichage)
-      window.V = {};
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
-       V.renderNavBar = function (hHome, hProfile, profiles) {
+    C.getMovie = async function () {
+      let data = await DataMovie.requestMovieCategory();
+      V.renderCategory(data);
+    };
+
+
+
+    // Fonction pour regrouper les films par catégorie
+
+
+
+    // On applelle la fonction handlerMovies lorsqu'on clique sur le bouton "Films"
+    C.handlerDetail = async function (id) {
+      console.log("ID reçu :", id); // debug
+      let details = await DataMovie.requestMovieDetail(id);
+      console.log("Détails du film :", details); // debug
+      V.renderMovieDetail(details[0]);
+      
+    };
+
+
+    C.handlerMovies = function () {
+      C.getMovie(); // Recharge la liste des films
+    };
+
+    C.handlerProfile = async function () {
+      const select = document.querySelector("#profile-select");
+      const selectedOption = select.selectedOptions[0];
+      const profileName = selectedOption.value;
+      const dob = selectedOption.getAttribute("data-dob");
+      const imageFilename = selectedOption.getAttribute("data-img");
+      const picture = document.querySelector("#profile-image");
+      const base = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/";
+
+      // Met à jour l'image de profil
+      picture.src = base + imageFilename;
+
+      // Récupère les films pour le profil sélectionné
+      let data = await DataMovie.requestMovieCategory(); // Remplacez par une fonction adaptée si nécessaire
+      console.log("Films pour le profil sélectionné :", data);
+
+      // Affiche les films
+      V.renderCategory(data);
+    };
+
+
+    // Vue (contient tout ce qui est relatif à l'affichage)
+    window.V = {};
+
+    /**
+     * V.renderNavBar
+     *
+     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+     * formaté par le composant NavBar.
+     */
+    V.renderNavBar = function (hHome, hProfile, profiles) {
       let header = document.querySelector("#header");
       header.innerHTML = NavBar.format(hHome, hProfile, profiles);
-      };
-      
-      V.renderMovie = function (data) {
-        let content = document.querySelector("#content");
-        content.innerHTML = Movie.format(data);
-      };
+    };
 
-      V.renderMovieDetail = function (data) {
-        if (!data) return; // Si data est vide, on ne fait rien
+    V.renderMovie = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = Movie.format(data);
+    };
 
-        let content = document.querySelector("#content");
-        content.innerHTML = MovieDetail.format(data);
-        console.log(MovieDetail.format(data));
-      };
+    V.renderMovieDetail = function (data) {
+      if (!data) return; // Si data est vide, on ne fait rien
 
-      V.renderCategory = function () {
-        let categorySection = document.querySelector("#cat");
-        categorySection.innerHTML = MovieCategory.format();
-      };
+      let content = document.querySelector("#content");
+      content.innerHTML = MovieDetail.format(data);
+      console.log(MovieDetail.format(data));
+    };
 
-      V.renderNoMoviesMessage = function () {
-        let content = document.querySelector("#content");
-        content.innerHTML = `
-        <div class="no-movies-message">
-            Aucun film pour le moment.`;
-      };
+    V.renderCategory = function (data) {
+      let content = document.querySelector("#content");
+      content.innerHTML = ""; // Réinitialise le contenu
 
-      C.start(); // Démarre l'application
-    </script>
-  </body>
+      for (let i = 0; i < data.length; i++) {
+        let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
+        content.innerHTML += categoryHtml; // Ajoute le HTML de la catégorie au contenu
+      }
+    };
+
+    // V.renderNoMoviesMessage = function () {
+    //   let content = document.querySelector("#content");
+    //   content.innerHTML = `
+    //   <div class="no-movies-message">
+    //       Aucun film pour le moment.`;
+    // };
+
+    C.start(); // Démarre l'application
+  </script>
+</body>
+
 </html>
 <script type="module"></script>

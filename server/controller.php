@@ -21,19 +21,10 @@ function readMovieDetailController(){
 }
 
 
-function readMoviesByCategoryController() {
-  $id_category = $_REQUEST['id_category'] ?? null;
-  
-  if (empty($id_category)) {
-    http_response_code(400); // 400 = Bad Request
-    echo json_encode(["success" => false, "message" => "ID catégorie manquant"]);
-    return false;
-  }
-  
-  $movies = getMoviesByCategory($id_category);
-  return $movies;
+  function readMovieCategoryController() {
+    $category = getMovieCategory();
+    return $category ? $category : false;
 }
-
 
 function addController() {
 
