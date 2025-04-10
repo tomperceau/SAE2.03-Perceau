@@ -9,7 +9,7 @@ MovieCategory.format = function (category) {
   let categoryHtml = template;
   categoryHtml = categoryHtml.replace("{{name}}", category.name);
 
-  let moviesListHtml = Movie.format(category.movie || []);
+  let moviesListHtml = Movie.format(category.movies || []);
   categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
 
   return categoryHtml;
