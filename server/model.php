@@ -114,13 +114,13 @@ function getMovieDetail($id){
     return $res; // Retourne les résultats
 }
 
-    function addProfile($name, $image, $datenaissance) {
+    function addProfile($name, $image, $age) {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO User (name, image, datenaissance) VALUES (:name, :image, :datenaissance)";
+        $sql = "INSERT INTO User (name, image, age) VALUES (:name, :image, :age)";
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':datenaissance', $datenaissance);
+        $stmt->bindParam(':age', $age);
         $stmt->execute();
       
         return ["success" => true];
@@ -128,7 +128,7 @@ function getMovieDetail($id){
 
 function readProfile() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image, datenaissance FROM User";
+    $sql = "SELECT id, name, image, age FROM User";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     $profiles = $stmt->fetchAll(PDO::FETCH_OBJ);

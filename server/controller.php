@@ -55,12 +55,12 @@ function addProfileController(){
 
   $name = $_REQUEST['name'] ?? null;
   $image = $_REQUEST['image'] ?? null;
-  $datenaissance = $_REQUEST['datenaissance'] ?? null;
+  $age = $_REQUEST['age'] ?? null;
   
-  if (empty($name) || empty($image) || empty($datenaissance)) {
+  if (empty($name) || empty($image) || empty($age)) {
     return "Erreur : Tous les champs doivent être remplis.";
   }
-  $ok = addProfile($name, $image,$datenaissance);
+  $ok = addProfile($name, $image,$age);
   if ($ok!=0){
     return "L'utilisateur a été ajouté avec succès !";
   } 

@@ -11,7 +11,7 @@ NavBar.format = function (hHome, hProfile, profiles) {
   let profile = "";
   for (let i = 0; i < profiles.length; i++) {
       let p = profiles[i];
-      profile += `<option value="${p.name}" data-img="${p.image}" data-dob="${p.datenaissance}">${p.name}</option>`;
+      profile += `<option value="${p.name}" data-img="${p.image}" data-dob="${p.age}">${p.name}</option>`;
   }
 
   let image = profiles[0]?.image || "";
