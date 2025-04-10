@@ -21,9 +21,10 @@ function readMovieDetailController(){
 }
 
 
-  function readMovieCategoryController() {
-    $category = getMovieCategory();
-    return $category ? $category : false;
+function readMoviesByCategoryController() {
+  $age = isset($_REQUEST['age']) ? intval($_REQUEST['age']) : 0; // Récupère l'âge ou 0 par défaut
+  $categories = getMoviesByCategory($age); // Appelle la fonction du modèle avec l'âge
+  return $categories ? $categories : false;
 }
 
 function addController() {
@@ -70,10 +71,17 @@ function addProfileController(){
       }
 
 
-      function readProfileController() {
-        $profiles = readProfile();
+      function readProfileController(){
+        if (!isset($_REQUEST['id'])) {
+          $profiles = readProfile(); 
+        }
+        else{
+          $id = $_REQUEST['id'];
+          $profiles = readOneProfile($id);
+        }
+       
         return $profiles;
-    }
+      }
 
 
 

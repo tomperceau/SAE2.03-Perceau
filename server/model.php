@@ -53,46 +53,42 @@ function addMovie($name, $year, $length, $description, $director, $id_category, 
 }
 
 
-function getMovieCategory() {
-    try {
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
+function getMoviesByCategory($age) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
 
-        $sql = "SELECT 
-                    Category.id AS category_id, 
-                    Category.name AS category_name, 
-                    Movie.id AS movie_id,
-                    Movie.name AS movie_name, 
-                    Movie.image AS movie_image
-                FROM Movie
-                JOIN Category ON Movie.id_category = Category.id
-                ORDER BY Category.id";
+    // Requête SQL pour récupérer les films groupés par catégorie
+    $sql = "SELECT Category.id AS category_id, Category.name AS category_name, 
+                   Movie.id AS movie_id, Movie.name AS movie_name, Movie.image AS movie_image
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.min_age <= :age";
 
-        $stmt = $cnx->query($sql);
-        $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age, PDO::PARAM_INT);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        $category = [];
-        foreach ($rows as $row) {
-            if (!isset($category[$row->category_id])) {
-                $category[$row->category_id] = [
-                    "name" => $row->category_name,
-                    "movie" => []
-                ];
-            }
-            $category[$row->category_id]["movie"][] = [
-                "id" => $row->movie_id,
-                "name" => $row->movie_name,
-                "image" => $row->movie_image
+    // Regrouper les films par catégorie
+    $categories = [];
+    foreach ($rows as $row) {
+        if (!isset($categories[$row->category_id])) {
+            $categories[$row->category_id] = [
+                "name" => $row->category_name,
+                "movies" => []
             ];
         }
-
-        return array_values($category);
-    } catch (Exception $e) {
-        error_log("Erreur SQL : " . $e->getMessage());
-        return false;
+        $categories[$row->category_id]["movies"][] = [
+            "id" => $row->movie_id,
+            "name" => $row->movie_name,
+            "image" => $row->movie_image
+        ];
     }
+
+    return array_values($categories); 
 }
+
 
 
 function getMovieDetail($id){
@@ -126,24 +122,35 @@ function getMovieDetail($id){
         return ["success" => true];
       }
 
-function readProfile() {
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, image, age FROM User";
-    $stmt = $cnx->prepare($sql);
-    $stmt->execute();
-    $profiles = $stmt->fetchAll(PDO::FETCH_OBJ);
+      function readProfile() {
+        // Connexion à la base de données
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        // Requête SQL pour récupérer le menu avec des paramètres
+        $sql = "select id, name, image, age from User";
+        // Prépare la requête SQL
+        $stmt = $cnx->prepare($sql);
+        // Exécute la requête SQL
+        $stmt->execute();
+        // Récupère les résultats de la requête sous forme d'objets
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res; // Retourne les résultats
+    }
+    
+    
+    function readOneProfile($id) {
+        // Connexion à la base de données
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        // Requête SQL pour récupérer le menu avec des paramètres
+        $sql = "select * from User where id = :id";
+        // Prépare la requête SQL
+        $stmt = $cnx->prepare($sql);
+        
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        // Exécute la requête SQL
+        $stmt->execute();
+        // Récupère les résultats de la requête sous forme d'objets
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res; // Retourne les résultats
+    }
 
 
-    return $profiles;
-}
-
-
-function getMovieByProfil($age){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, image, min_age FROM Movie WHERE min_age <= :age";
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':age', $age);
-    $stmt->execute();
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; 
-}

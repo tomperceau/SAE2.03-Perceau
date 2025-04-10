@@ -6,10 +6,17 @@ let HOST_URL = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau";
 let DataProfile = {};
 
 
-DataProfile.read = async function () {
+DataProfile.readProfile = async function () {
   let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfile");
-  let Profiles = await answer.json();
-  return Profiles;
+  let profile = await answer.json();
+  return profile;
+};
+
+DataProfile.readOne = async function (id) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=readProfile&id=" + id);
+  
+  let res = await answer.json();
+  return res;
 };
 
 

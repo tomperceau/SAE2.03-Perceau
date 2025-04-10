@@ -30,22 +30,41 @@
     // Une fois l'application terminée, on pourrait remettre let C.
     window.C = {};
 
+    C.profile = null;
 
     C.start = async function () {
-    let profiles = await DataProfile.read();
-    V.renderNavBar("C.handlerMovies", "C.handlerProfile", profiles); // Passez la référence
-    console.log("C.start");
-    let categories = await DataMovie.requestMovieCategory(); // Récupère les catégories
-    V.renderCategory(categories); // Affiche les catégories
-    C.getMovie();
-};
+      let profiles = await DataProfile.readProfile();
+        V.renderNavBar("C.handlerMovies", "C.handlerProfile", profiles);
+        C.getMovie();
+        C.getCategories();
+      };
 
-    C.getMovie = async function () {
-      let data = await DataMovie.requestMovieCategory();
-      V.renderCategory(data);
-    };
+    C.getMovie = async function (age) {
+        let data = await DataMovie.requestMovies(age);
+        if (!Array.isArray(data) || data.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(data);
+      };
 
 
+      C.getCategories = async function () {
+        if (!C.profile) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun profil sélectionné.</p>";
+          return;
+        }
+       
+        let categories = await DataMovie.requestMovies(99);
+        if (!Array.isArray(categories) || categories.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+          return;
+        }
+        V.renderMovieCategory(categories); // Affiche les catégories
+      };
 
     // Fonction pour regrouper les films par catégorie
 
@@ -60,51 +79,34 @@
       
     };
 
-
-    C.handlerMovies = function () {
-      C.getMovie(); // Recharge la liste des films
-    };
-
+  
     C.handlerProfile = async function () {
-      const select = document.querySelector("#profile-select");
-      const selectedOption = select.selectedOptions[0];
-      const profileName = selectedOption.value;
-      const dob = selectedOption.getAttribute("data-dob");
-      const imageFilename = selectedOption.getAttribute("data-img");
-      const picture = document.querySelector("#profile-image");
-      const base = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/";
+    const select = document.querySelector("#profile-select");
+    let dataProfile = await DataProfile.readOne(select.value);
+    C.profile = dataProfile[0];
 
-      // Met à jour l'image de profil
-      picture.src = base + imageFilename;
+    const profileImage = document.querySelector("#profile-image");
+    if (profileImage && C.profile.image) {
+        profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/${C.profile.image}`;
+    }
 
-      // Récupère les films pour le profil sélectionné
-      let data = await DataMovie.requestMovieCategory(); // Remplacez par une fonction adaptée si nécessaire
-      console.log("Films pour le profil sélectionné :", data);
-
-      // Affiche les films
-      V.renderCategory(data);
-    };
-
+    C.getMovie(C.profile.age);
+};
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
-    /**
-     * V.renderNavBar
-     *
-     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-     * formaté par le composant NavBar.
-     */
+    
     V.renderNavBar = function (hHome, hProfile, profiles) {
       let header = document.querySelector("#header");
       header.innerHTML = NavBar.format(hHome, hProfile, profiles);
     };
 
     V.renderMovie = function (data) {
-      let content = document.querySelector("#content");
-      content.innerHTML = Movie.format(data);
-    };
+    console.log("Données reçues par Movie.format :", data); // Debug
+    let content = document.querySelector("#content");
+    content.innerHTML = Movie.format(data);
+};
 
     V.renderMovieDetail = function (data) {
       if (!data) return; // Si data est vide, on ne fait rien
@@ -114,24 +116,19 @@
       console.log(MovieDetail.format(data));
     };
 
-    V.renderCategory = function (data) {
-      let content = document.querySelector("#content");
-      content.innerHTML = ""; // Réinitialise le contenu
 
-      for (let i = 0; i < data.length; i++) {
-        let categoryHtml = MovieCategory.format(data[i]); // Formate chaque catégorie
-        content.innerHTML += categoryHtml; // Ajoute le HTML de la catégorie au contenu
-      }
-    };
+    V.renderMovieCategory= function (data) {
+      
+        let content = document.querySelector("#content");
+        let formattedContent = "";
+        for (let category of data) {
+          formattedContent += MovieCategory.format(category);
+          
+        }
+        content.innerHTML = formattedContent;
+      };
 
-    // V.renderNoMoviesMessage = function () {
-    //   let content = document.querySelector("#content");
-    //   content.innerHTML = `
-    //   <div class="no-movies-message">
-    //       Aucun film pour le moment.`;
-    // };
-
-    C.start(); // Démarre l'application
+    C.start(); 
   </script>
 </body>
 
