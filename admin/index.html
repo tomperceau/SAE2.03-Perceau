@@ -22,8 +22,7 @@
       import { DataProfile } from "./data/dataProfile.js";
 
       import { ProfileForm } from "./component/ProfileForm/script.js";
-      import { UpdateProfileForm } from "./component/UpdateProfileForm/script.js";
-
+      import { updateProfileForm } from "./component/UpdateProfileForm/script.js";
       window.C = {};
 
 
@@ -41,18 +40,37 @@
     V.renderLog(res);
 
 };
-C.handlerUpdateProfile = async function () {
-        let form = document.querySelector(".updateProfile__form");
-        let fd = new FormData(form);
-        let res = await DataProfile.update(fd);
-        V.renderLog(res);
-      };
+
+
+      C.handlerUpdateProfile = async function() {
+      let form = document.querySelector('.updateProfile__form');
+      // Si tous les champs sont remplis, on peut envoyer les données
+      let fd = new FormData(form);
+      let res = await DataProfile.update(fd);
+      // Affichage du résultat dans le log
+      V.renderLog(res);
+    };
+
+    C.loadProfiles = async function() {
+      let profiles = await DataProfile.readProfile();
+      let optionsHtml = "";
+      for (let i = 0; i < profiles.length; i++) {
+        let profile = profiles[i];
+        optionsHtml += `<option value="${profile.id}">${profile.name}</option>`;
+      }
+      let select = document.querySelector('#profile-select');
+      if (select) {
+        select.innerHTML = optionsHtml;
+      }
+    };
+
+
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderForm("C.handlerAddMovie()");
         V.renderAddProfileForm("C.handlerAddProfile()");
-        V.renderUpdateProfileForm("C.handlerSelectProfile", "C.handlerUpdateProfile");
-
+        V.renderUpdateProfileForm("C.handlerUpdateProfile()");
+        C.loadProfiles();
       };
 
       window.V = {};
@@ -73,15 +91,11 @@ C.handlerUpdateProfile = async function () {
         content.innerHTML = ProfileForm.format(handler);
       };
 
-      V.renderUpdateProfileForm = async function (handlerSelect, handlerUpdate) {
-        let content = document.querySelector("#updateProfile");
-        let profiles = await DataProfile.getAllProfile();
-        content.innerHTML = UpdateProfileForm.format(
-          profiles,
-          handlerSelect,
-          handlerUpdate
-        );
-        UpdateProfileForm.init();
+
+
+V.renderUpdateProfileForm = function(handler) {
+      let content = document.querySelector("#updateProfile");
+      content.innerHTML = updateProfileForm.format(handler);  
       };
       C.start();
     </script>

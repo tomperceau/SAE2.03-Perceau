@@ -1,34 +1,15 @@
+
+
+
 <div class="updateProfile">
-    <h4 class="updateProfile__title">Modifier un utilisateur</h4>
-  
-    <select id="Profile-select" onchange="{{handlerSelect}}">
-      {{options}}
-    </select>
-  
+    <h4 class="updateProfile__title">Modifier un profile</h4>
     <form class="updateProfile__form">
-      <input required type="hidden" name="id" />
-      <input
-        id="Profile-name"
-        required
-        type="text"
-        name="name"
-        placeholder="Saisir un nom"
-      />
-      <input
-        id="Profile-image"
-        required
-        type="text"
-        name="image"
-        placeholder="Saisir une image"
-      />
-  
-      <input
-        id="Profile-birthday"
-        required
-        type="text"
-        name="age"
-        placeholder="Saisir un age"
-      />
-      <button type="button" onclick="{{handler}}">Modifier</button>
+      <select id="profile-select"  name="id" class="updateProfile__form" onchange="{{hProfile}}">
+        {{profile}}
+      </select>
+      <input class="updateProfile__option" type="text" required name="name" placeholder="Saisir un nom">
+      <input class="updateProfile__option" type="text" required name="image" placeholder="Saisir l'url d'une image">
+      <input class="updateProfile__option" type="text" name="age" placeholder="age" />
+      <input class="updateProfile__button" onclick="{{handler}}" type="button" value="Update" name="todo">
     </form>
   </div>
