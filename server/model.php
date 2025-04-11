@@ -153,4 +153,17 @@ function getMovieDetail($id){
         return $res; // Retourne les résultats
     }
 
+    function updateProfile($id, $name, $image, $age) {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
+        $sql = "UPDATE User SET name = :name, image = :image, age = :age WHERE id = :id";
+
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':age', $age);
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+        return $stmt->rowCount(); // Retourne 1 si ok, 0 sinon
+    }

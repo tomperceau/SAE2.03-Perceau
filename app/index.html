@@ -51,11 +51,11 @@
 
 
       C.getCategories = async function () {
-        if (!C.profile) {
-          document.querySelector("#content").innerHTML =
-            "<p>Aucun profil sélectionné.</p>";
-          return;
-        }
+        // if (!C.profile) {
+        //   document.querySelector("#content").innerHTML =
+        //     "<p>Aucun profil sélectionné.</p>";
+        //   return;
+        // }
        
         let categories = await DataMovie.requestMovies(99);
         if (!Array.isArray(categories) || categories.length === 0) {
@@ -82,6 +82,12 @@
   
     C.handlerProfile = async function () {
     const select = document.querySelector("#profile-select");
+    if (select.value === "") {
+        C.profile = null; // Réinitialise le profil
+        document.querySelector("#content").innerHTML = "<p>Aucun profil sélectionné.</p>";
+        return;
+    }
+
     let dataProfile = await DataProfile.readOne(select.value);
     C.profile = dataProfile[0];
 

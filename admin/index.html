@@ -12,6 +12,7 @@
     <section id="log"></section>
     <section  id="addProfile"></section>
     <section  id="content"></section>
+    <section  id="updateProfile"></section>
 
     <script type="module">
       // Importation des modules
@@ -21,6 +22,7 @@
       import { DataProfile } from "./data/dataProfile.js";
 
       import { ProfileForm } from "./component/ProfileForm/script.js";
+      import { UpdateProfileForm } from "./component/UpdateProfileForm/script.js";
 
       window.C = {};
 
@@ -39,11 +41,18 @@
     V.renderLog(res);
 
 };
-
+C.handlerUpdateProfile = async function () {
+        let form = document.querySelector(".updateProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.update(fd);
+        V.renderLog(res);
+      };
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderForm("C.handlerAddMovie()");
         V.renderAddProfileForm("C.handlerAddProfile()");
+        V.renderUpdateProfileForm("C.handlerSelectProfile", "C.handlerUpdateProfile");
+
       };
 
       window.V = {};
@@ -62,6 +71,17 @@
       V.renderAddProfileForm = function (handler) {
         let content = document.querySelector("#addProfile");
         content.innerHTML = ProfileForm.format(handler);
+      };
+
+      V.renderUpdateProfileForm = async function (handlerSelect, handlerUpdate) {
+        let content = document.querySelector("#updateProfile");
+        let profiles = await DataProfile.getAllProfile();
+        content.innerHTML = UpdateProfileForm.format(
+          profiles,
+          handlerSelect,
+          handlerUpdate
+        );
+        UpdateProfileForm.init();
       };
       C.start();
     </script>

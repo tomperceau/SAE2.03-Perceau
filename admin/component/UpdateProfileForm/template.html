@@ -1,0 +1,34 @@
+<div class="updateProfile">
+    <h4 class="updateProfile__title">Modifier un utilisateur</h4>
+  
+    <select id="Profile-select" onchange="{{handlerSelect}}">
+      {{options}}
+    </select>
+  
+    <form class="updateProfile__form">
+      <input required type="hidden" name="id" />
+      <input
+        id="Profile-name"
+        required
+        type="text"
+        name="name"
+        placeholder="Saisir un nom"
+      />
+      <input
+        id="Profile-image"
+        required
+        type="text"
+        name="image"
+        placeholder="Saisir une image"
+      />
+  
+      <input
+        id="Profile-birthday"
+        required
+        type="text"
+        name="age"
+        placeholder="Saisir un age"
+      />
+      <button type="button" onclick="{{handler}}">Modifier</button>
+    </form>
+  </div>

@@ -92,3 +92,18 @@ function addProfileController(){
       }
       return getMovieByProfil($age);
   }
+
+
+  function updateProfileController() {
+    $id = $_REQUEST['id'] ?? null;
+    $name = $_REQUEST['name'] ?? null;
+    $image = $_REQUEST['image'] ?? null;
+    $age = $_REQUEST['age'] ?? null;
+
+    if (empty($id) || empty($name) || empty($age)) {
+        return "Erreur : Tous les champs obligatoires doivent être remplis.";
+    }
+
+    $ok = updateProfile($id, $name, $image, $age);
+    return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
+}
