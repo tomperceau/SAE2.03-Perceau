@@ -49,14 +49,17 @@
         V.renderMovieCategory(data);
       };
 
+      C.Accueil = function () {
+        if (C.profile) {
+          C.getMovie(C.profile.age); n
+        } else {
+          document.querySelector("#content").innerHTML =
+            "<p>Veuillez sélectionner un profil.</p>";
+        }
+      };
 
       C.getCategories = async function () {
-        // if (!C.profile) {
-        //   document.querySelector("#content").innerHTML =
-        //     "<p>Aucun profil sélectionné.</p>";
-        //   return;
-        // }
-       
+
         let categories = await DataMovie.requestMovies(99);
         if (!Array.isArray(categories) || categories.length === 0) {
           document.querySelector("#content").innerHTML =
@@ -76,28 +79,28 @@
       let details = await DataMovie.requestMovieDetail(id);
       console.log("Détails du film :", details); // debug
       V.renderMovieDetail(details[0]);
-      
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
     };
 
-  
     C.handlerProfile = async function () {
-    const select = document.querySelector("#profile-select");
-    if (select.value === "") {
-        C.profile = null; // Réinitialise le profil
-        document.querySelector("#content").innerHTML = "<p>Aucun profil sélectionné.</p>";
-        return;
-    }
+        const select = document.querySelector("#profile-select");
+        const profileImage = document.querySelector("#profile-image");
 
-    let dataProfile = await DataProfile.readOne(select.value);
-    C.profile = dataProfile[0];
+        if (!select.value) {
 
-    const profileImage = document.querySelector("#profile-image");
-    if (profileImage && C.profile.image) {
-        profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/${C.profile.image}`;
-    }
+          profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/default.avif`;
+        }
 
-    C.getMovie(C.profile.age);
-};
+        let dataProfile = await DataProfile.readOne(select.value);
+        C.profile = dataProfile[0];
+
+        if (C.profile && C.profile.image) {
+          profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/server/images/${C.profile.image}`;
+        }
+
+        C.getMovie(C.profile.age);
+      };
 
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};

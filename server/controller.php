@@ -85,15 +85,6 @@ function addProfileController(){
 
 
 
-    function movieByProfilController() {
-      $age = $_REQUEST['age'];
-      if ($age == null) {
-          return false;
-      }
-      return getMovieByProfil($age);
-  }
-
-
   function updateProfileController() {
     $id = $_REQUEST['id'] ?? null;
     $name = $_REQUEST['name'] ?? null;
