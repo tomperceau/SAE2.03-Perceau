@@ -11,15 +11,14 @@ DataProfile.add = async function (formData) {
   return response;
 };
 
-DataProfile.update = async function (fdata) {
+DataProfile.update = async function (formdata) {
   let config = {
     method: "POST", 
-    body: fdata, 
+    body: formdata, 
   };
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=updateProfile",
-    config
-  );
+    config);
   let data = await answer.json();
   return data;
 };

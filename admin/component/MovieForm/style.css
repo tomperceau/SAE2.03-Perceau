@@ -1,11 +1,12 @@
-
-
- .addMovie {
- background-color: #3C3C3C;
-  border-radius: 8px;
-  color: #ecf0f1;
-  font-family: Arial, sans-serif;
-  padding-bottom: 5rem;
+.addMovie {
+  background-color: #2C2C2C; /* Fond sombre similaire à ProfileForm */
+  border-radius: 10px; /* Coins arrondis */
+  color: #FFFFFF; /* Texte blanc */
+  font-family: 'Inter', Arial, sans-serif; /* Police harmonisée */
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
+  margin: 1rem auto; /* Centrer horizontalement */
+  max-width: 50rem;
 }
 
 .addMovie-content {
@@ -13,48 +14,62 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem; /* Espacement entre les éléments */
 }
 
 .addMovie-content__title {
   font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #D9D9D9;
+  margin-bottom: 1rem;
+  color: #FFD700; /* Couleur dorée pour le titre */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Ombre pour le texte */
 }
 
 .addMovie-content__form {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #C5C5C5;
-  border-radius: 3rem;
+  background-color: #3C3C3C; /* Fond légèrement plus clair */
+  border-radius: 15px; /* Coins arrondis */
   padding: 2rem;
-  width: 75%;
+  width: 80%;
   gap: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
 }
 
 .addMovie-content__form-group {
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #D9D9D9
-  ;
-  border-radius: 0.25rem;
+  border: 1px solid #FFD700; /* Bordure dorée */
+  border-radius: 8px; /* Coins arrondis */
   width: 100%;
+  background-color: #2C2C2C; /* Fond sombre */
+  color: #FFFFFF; /* Texte blanc */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.addMovie-content__form-group:focus-within {
+  border-color: #FFD700; /* Bordure dorée au focus */
+  background-color: #444444; /* Fond légèrement plus clair au focus */
 }
 
 .addMovie-content__form-button {
   padding: 1rem;
   font-size: 1.2rem;
-  background-color: #3C3C3C;
-  color: #fff;
+  background-color: #FFD700; /* Bouton doré */
+  color: #000000; /* Texte noir */
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px; /* Coins arrondis */
   width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .addMovie-content__form-button:hover {
-  background-color: black;
+  background-color: #FFC107; /* Couleur dorée plus claire au survol */
+  transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.addMovie-content__form-button:active {
+  background-color: #FFA000; /* Couleur dorée plus foncée au clic */
+  transform: scale(0.95); /* Réduction légère au clic */
 }

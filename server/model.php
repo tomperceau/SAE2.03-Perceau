@@ -123,34 +123,24 @@ function getMovieDetail($id){
       }
 
       function readProfile() {
-        // Connexion à la base de données
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        // Requête SQL pour récupérer le menu avec des paramètres
         $sql = "select id, name, image, age from User";
-        // Prépare la requête SQL
         $stmt = $cnx->prepare($sql);
-        // Exécute la requête SQL
         $stmt->execute();
-        // Récupère les résultats de la requête sous forme d'objets
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res; // Retourne les résultats
-    }
+        return $res; 
+      }
     
     
     function readOneProfile($id) {
-        // Connexion à la base de données
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        // Requête SQL pour récupérer le menu avec des paramètres
         $sql = "select * from User where id = :id";
-        // Prépare la requête SQL
         $stmt = $cnx->prepare($sql);
-        
+    
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        // Exécute la requête SQL
         $stmt->execute();
-        // Récupère les résultats de la requête sous forme d'objets
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res; // Retourne les résultats
+        return $res;
     }
 
     function updateProfile($id, $name, $image, $age) {

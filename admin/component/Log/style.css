@@ -1,18 +1,28 @@
-.log {
+body{
+  background-color: black;
+}
+
+.log{
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+    background-color: black; /* Fond optionnel pour le conteneur */ 
+}
+
+.log-container{
   display: flex;
   align-items: flex-end;
   width: 30rem;
   height: 8rem;
   padding: 1rem 1rem 1rem 1.5rem;
-
-  background-color: var(--color-bg);
+background-color: #2C2C2C;
   border-style: solid;
-  border-color: var(--color-fg);
+  border-color: #FFD700;
   border-width: 1px;
   overflow: hidden;
   .log__list {
     font-size: smaller;
-    color: var(--color-accent);
+    color: #FFD700;
     overflow-y: scroll;
     .last {
       animation: fondu-en-entree 1s ease-in-out;
