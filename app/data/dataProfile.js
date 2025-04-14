@@ -18,37 +18,8 @@ DataProfile.readOne = async function (id) {
   let res = await answer.json();
   return res;
 };
-DataProfile.requestFavoris   = async function (id_user) {
-  let res = await fetch(
-    `${HOST_URL}/server/script.php?todo=getFavorisUserMovie&id_user=${id_user}`
-  );
-  return await res.json();
-};
 
-DataProfile.addFavoris = async function (id_user, id_movie) {
-  const fd = new FormData();
-  fd.append("id_user", id_user);
-  fd.append("id_movie", id_movie);
 
-  const res = await fetch(`${HOST_URL}/server/script.php?todo=addFavoris`, {
-    method: "POST",
-    body: fd,
-  });
-
-  return await res.json();
-};
-DataProfile.removeFavoris = async function (id_user, id_movie) {
-  const fd = new FormData();
-  fd.append("id_user", id_user);
-  fd.append("id_movie", id_movie);
-
-  const res = await fetch(`${HOST_URL}/server/script.php?todo=removeFavoris=${id_user, id_movie}`, {
-    method: "POST",
-    body: fd,
-  });
-
-  return await res.json();
-};
 
 
 

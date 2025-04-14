@@ -100,38 +100,36 @@ function addProfileController(){
 }
 
 
-function addFavorisController()
-{
-  $user = $_REQUEST['id_user'] ?? null;
-  $movie = $_REQUEST['id_movie'] ?? null;
-
-  if (empty($user) || empty($movie)) {
-    return 'Erreur : Tous les champs doivent être remplis.';
-  }
-  $ok = addFavoris($user, $movie);
-}
-
-
-function readFavorisController()
-{
+function addFavorisController() {
   $id_user = $_REQUEST['id_user'] ?? null;
+  $id_movie = $_REQUEST['id_movie'] ?? null;
 
-  if ($id_user === null) {
-    return false;
+  if (isFavoris($id_movie, $id_user)) {
+      return ["error" => "Ce film est déjà dans les favoris."];
   }
 
-  return getFavoris($id_user);
+  $result = addFavoris($id_movie, $id_user);
+  if ($result) {
+      return ["success" => "Film ajouté aux favoris."];
+  } else {
+      return ["error" => "Impossible d'ajouter le film aux favoris."];
+  }
 }
 
-function removeFavorisController()
-{
-  $user = $_REQUEST['id_user'] ?? null;
-  $movie = $_REQUEST['id_movie'] ?? null;
 
-  if (empty($user) || empty($movie)) {
-    return 'Erreur : Tous les champs doivent être remplis.';
+function getFavorisController() {
+  $id_user = $_REQUEST['id_user'] ?? null;
+  $favoris = getFavoris($id_user);
+  return $favoris ? $favoris : [];
+}
+
+function removeFavorisController() {
+  $id_user = $_REQUEST['id_user'] ?? null;
+  $id_movie = $_REQUEST['id_movie'] ?? null;
+  $result = removeFavoris($id_movie, $id_user);
+  if ($result) {
+      return ["success" => "Film supprimé des favoris."];
+  } else {
+      return ["error" => "Impossible de supprimer le film des favoris."];
   }
-
-  $ok = removeFavoris($user, $movie);
-  return $ok ? 'Favoris supprimé' : 'Aucun Favoris à supprimer';
 }

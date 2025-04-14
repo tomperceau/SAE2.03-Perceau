@@ -136,64 +136,87 @@ function getMovieDetail($id){
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $sql = "select * from User where id = :id";
         $stmt = $cnx->prepare($sql);
-    
+        
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $res;
     }
-
+    
     function updateProfile($id, $name, $image, $age) {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-
+        
         $sql = "UPDATE User SET name = :name, image = :image, age = :age WHERE id = :id";
-
+        
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':image', $image);
         $stmt->bindParam(':age', $age);
         $stmt->bindParam(':id', $id);
-
+        
         $stmt->execute();
         return $stmt->rowCount(); // Retourne 1 si ok, 0 sinon
     }
-
-    function getFavoris($id_user)
+    
+    function addFavoris($id_movie, $id_user)
     {
         $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
-        $sql = 'SELECT id_user, id_movie FROM Favoris WHERE id_user = :id_user';
-        $sql = "SELECT * FROM Favoris JOIN Movie ON Favoris.id_movie = Movie.id WHERE Favoris.id_user = :id_user";
+        
+        $sql = 'INSERT INTO Favoris (id_movie, id_user) 
+                VALUES (:id_movie, :id_user )';
 
+$stmt = $cnx->prepare($sql);
+
+$stmt->bindParam(':id_user', $id_user);
+$stmt->bindParam(':id_movie', $id_movie);
+
+
+$stmt->execute();
+$res = $stmt->rowCount();
+return $res;
+}
+
+function getFavoris($id_user) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+  
+    $sql = "SELECT Movie.id, Movie.name, Movie.image 
+            FROM Favoris 
+            INNER JOIN Movie ON Favoris.id_movie = Movie.id 
+            WHERE Favoris.id_user = :id_user";
+  
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+    $stmt->execute();
+  
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+  }
+
+function isFavoris($id_movie, $id_user) {
+    try {
+            $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+            $sql = "SELECT COUNT(*) FROM Favoris WHERE id_movie = :id_movie AND id_user = :id_user";
+            $stmt = $cnx->prepare($sql);
+            $stmt->bindParam(':id_movie', $id_movie, PDO::PARAM_INT);
+            $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+            return $count > 0;
+        } catch (PDOException $e) {
+            error_log("Erreur SQL dans isFavoris : " . $e->getMessage());
+            return false;
+        }
+    }
+    
+
+
+    function removeFavoris($id_movie, $id_user)
+    {
+        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+        $sql = 'DELETE FROM Favoris 
+        WHERE id_user = :id_user AND id_movie = :id_movie';
         $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_movie', $id_movie, PDO::PARAM_INT);
         $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    function addFavoris($user, $movie)
-    {
-        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
-
-        $sql = 'INSERT INTO Favoris (id_user, id_movie) 
-                VALUES (:id_user, :id_movie)';
-
-        $stmt = $cnx->prepare($sql);
-
-        $stmt->bindParam(':id_user', $user);
-        $stmt->bindParam(':id_movie', $movie);
-
-        $stmt->execute();
-        $res = $stmt->rowCount();
-        return $res;
-    }
-
-    function removeFavoris($user, $movie)
-    {
-        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
-        $sql = 'DELETE FROM Favoris WHERE id_user = :id_user AND id_movie = :id_movie';
-        $stmt = $cnx->prepare($sql);
-        $stmt->bindParam(':id_user', $user);
-        $stmt->bindParam(':id_movie', $movie);
         $stmt->execute();
         return $stmt->rowCount();
     }

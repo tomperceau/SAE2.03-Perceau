@@ -17,13 +17,13 @@
     overflow: hidden;
     border-radius: 1rem; /* Coins arrondis */
     cursor: pointer;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-card:hover {
     transform: scale(1.05); /* Zoom léger au survol */
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); /* Ombre plus marquée */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombre plus marquée */
 }
 
 .movie-card_img {
@@ -55,7 +55,6 @@
     opacity: 1;
     transform: translate(-50%, -50%);
 }
-
 .card__favoris {
     position: absolute;
     top: 1rem;
@@ -72,21 +71,21 @@
     cursor: pointer;
     z-index: 2;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.card__favoris:hover {
+  }
+  
+  .card__favoris:hover {
     background-color: rgba(255, 255, 255, 0.85);
     color: var(--color-gray-darkest);
     transform: scale(1.1);
-}
-
-.card__favoris--liked {
+  }
+  
+  .card__favoris--liked {
     color: red;
     transform: scale(1.2);
     transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.card__delete {
+  }
+  
+  .card__delete {
     position: absolute;
     top: 1rem;
     left: 1rem;
@@ -103,85 +102,85 @@
     cursor: pointer;
     z-index: 2;
     transition: background-color 0.3s ease;
-}
-
-.card__delete:hover {
+  }
+  
+  .card__delete:hover {
     background-color: rgba(255, 0, 0, 0.85);
-}
+  }
 
-.addFavoris_button {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    background-color: #1a1a1a;
-    color: white;
-    border: none;
-    border-radius: 20%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-    z-index: 3;
+  .addFavoris_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
 }
 
 .addFavoris_button:hover {
-    background-color: #333;
-    transform: scale(1.1);
+  background-color: #333;
+  transform: scale(1.1);
 }
 
 .addFavoris_button .icon-bookmark {
-    fill: none; 
-    stroke: white;
-    transition: fill 0.3s ease, stroke 0.3s ease;
+  fill: none; 
+  stroke: white;
+  transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
 .addFavoris_button.is-favoris .icon-bookmark {
-    fill: #FFC107; 
-    stroke: #ffffff; 
+  fill: #007bff; 
+  stroke: #ffffff; 
 }
 
 .addFavoris_button .icon-bookmark {
-    stroke: white;
-    transition: stroke 0.3s ease;
+  stroke: white;
+  transition: stroke 0.3s ease;
 }
 
 .addFavoris_button:active .icon-bookmark {
-    stroke: #fff;
+  stroke: #fff;
 }
 
 .removeFavoris_button {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    background: #FFC107;
-    border: none;
-    border-radius: 20%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .removeFavoris_button svg {
-    stroke: #ffffff; 
-    stroke-width: 0.125rem;
-    fill: none; 
-    transition: stroke 0.3s ease, transform 0.2s ease;
+  stroke: #ffffff; 
+  stroke-width: 2px;
+  fill: none; 
+  transition: stroke 0.3s ease, transform 0.2s ease;
 }
 
 .removeFavoris_button:hover {
-    background-color: #FFA000; 
-    transform: scale(1.1); 
+  background-color: #0056b3; 
+  transform: scale(1.1); 
 }
 
 .removeFavoris_button:active {
-    background-color: #FFA000; 
-    transform: scale(0.95); 
+  background-color: #003f7f; 
+  transform: scale(0.95); 
 }
