@@ -98,3 +98,40 @@ function addProfileController(){
     $ok = updateProfile($id, $name, $image, $age);
     return $ok ? "Le profil a été modifié avec succès." : "Erreur lors de la modification du profil.";
 }
+
+
+function addFavorisController()
+{
+  $user = $_REQUEST['id_user'] ?? null;
+  $movie = $_REQUEST['id_movie'] ?? null;
+
+  if (empty($user) || empty($movie)) {
+    return 'Erreur : Tous les champs doivent être remplis.';
+  }
+  $ok = addFavoris($user, $movie);
+}
+
+
+function readFavorisController()
+{
+  $id_user = $_REQUEST['id_user'] ?? null;
+
+  if ($id_user === null) {
+    return false;
+  }
+
+  return getFavoris($id_user);
+}
+
+function removeFavorisController()
+{
+  $user = $_REQUEST['id_user'] ?? null;
+  $movie = $_REQUEST['id_movie'] ?? null;
+
+  if (empty($user) || empty($movie)) {
+    return 'Erreur : Tous les champs doivent être remplis.';
+  }
+
+  $ok = removeFavoris($user, $movie);
+  return $ok ? 'Favoris supprimé' : 'Aucun Favoris à supprimer';
+}

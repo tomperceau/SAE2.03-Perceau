@@ -157,3 +157,43 @@ function getMovieDetail($id){
         $stmt->execute();
         return $stmt->rowCount(); // Retourne 1 si ok, 0 sinon
     }
+
+    function getFavoris($id_user)
+    {
+        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+        $sql = 'SELECT id_user, id_movie FROM Favoris WHERE id_user = :id_user';
+        $sql = "SELECT * FROM Favoris JOIN Movie ON Favoris.id_movie = Movie.id WHERE Favoris.id_user = :id_user";
+
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function addFavoris($user, $movie)
+    {
+        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+
+        $sql = 'INSERT INTO Favoris (id_user, id_movie) 
+                VALUES (:id_user, :id_movie)';
+
+        $stmt = $cnx->prepare($sql);
+
+        $stmt->bindParam(':id_user', $user);
+        $stmt->bindParam(':id_movie', $movie);
+
+        $stmt->execute();
+        $res = $stmt->rowCount();
+        return $res;
+    }
+
+    function removeFavoris($user, $movie)
+    {
+        $cnx = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, DBLOGIN, DBPWD);
+        $sql = 'DELETE FROM Favoris WHERE id_user = :id_user AND id_movie = :id_movie';
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_user', $user);
+        $stmt->bindParam(':id_movie', $movie);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }

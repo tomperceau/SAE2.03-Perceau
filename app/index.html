@@ -102,13 +102,40 @@
         C.getMovie(C.profile.age);
       };
 
+      C.handlerFavoris = async function () {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const id_user = selectedOption.getAttribute("data-id");
+
+        if (!id_user) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+
+        let movies = await DataProfile.requestGetfavoris(id_user);
+        V.renderMovie(movies);
+      };
+
+      C.handlerremoveFavoris = async function (idMovie) {
+        const select = document.querySelector("#profile-select");
+        const selectedOption = select.selectedOptions[0];
+        const id_user = selectedOption.getAttribute("data-id");
+
+        if (!id_user) {
+          alert("Aucun profil sélectionné !");
+          return;
+        }
+        await DataProfile.deleteLike(id_user, id_movie);
+        alert("Film supprimé des favoris !");
+      };
+
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
 
     
-    V.renderNavBar = function (hHome, hProfile, profiles) {
+    V.renderNavBar = function (hHome, hProfile, profiles, hFavoris) {
       let header = document.querySelector("#header");
-      header.innerHTML = NavBar.format(hHome, hProfile, profiles);
+      header.innerHTML = NavBar.format(hHome, hProfile, profiles, hFavoris);
     };
 
     V.renderMovie = function (data) {

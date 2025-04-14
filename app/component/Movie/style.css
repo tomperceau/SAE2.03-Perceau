@@ -55,3 +55,55 @@
     opacity: 1;
     transform: translate(-50%, -50%);
 }
+.card__favoris {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .card__favoris:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    color: var(--color-gray-darkest);
+    transform: scale(1.1);
+  }
+  
+  .card__favoris--liked {
+    color: red;
+    transform: scale(1.2);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .card__delete {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card__delete:hover {
+    background-color: rgba(255, 0, 0, 0.85);
+  }

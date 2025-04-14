@@ -3,9 +3,10 @@ let template = await templateFile.text();
 
 let NavBar = {};
 
-NavBar.format = function (hHome, hProfile, profiles) {
+NavBar.format = function (hHome, hProfile, profiles, hFavoris) {
   let html = template;
-  html = html.replace("{{hHome}}", `${hHome}()`); // Ajoute les parenthèses pour appeler la fonction
+  html = html.replace("{{hHome}}", `${hHome}()`);
+  html = html.replace("{{hFavoris}}", hFavoris);
   html = html.replace("{{handler}}", `${hProfile}()`);
 
   let profile = "";
