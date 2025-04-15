@@ -2,6 +2,7 @@ let HOST_URL = "https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau";
 
 let DataProfile = {};
 
+
 DataProfile.add = async function (formData) {
   let answer = await fetch(HOST_URL + "/server/script.php?todo=addProfile", {
     method: "POST",
@@ -11,10 +12,11 @@ DataProfile.add = async function (formData) {
   return response;
 };
 
+
 DataProfile.update = async function (formdata) {
   let config = {
-    method: "POST", 
-    body: formdata, 
+    method: "POST",
+    body: formdata,
   };
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=updateProfile",
@@ -22,6 +24,8 @@ DataProfile.update = async function (formdata) {
   let data = await answer.json();
   return data;
 };
+
+
 DataProfile.readProfile = async function () {
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=readProfile"
@@ -29,4 +33,6 @@ DataProfile.readProfile = async function () {
   let data = await answer.json();
   return data;
 };
+
+
 export { DataProfile };

@@ -1,27 +1,35 @@
-
-.movie-une{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    max-width: 50rem;
-    width: 100%;
-    gap: 16px;
+.movie-une {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: black; /* Fond noir */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
 }
+.movie-une__container {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: black; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .movie-une__card {
+  background-color: black; /* Fond légèrement plus clair */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
+  padding: 1.5rem;
+  width: 18rem; /* Largeur fixe des cartes */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2.5rem;
-  margin: 3rem auto;
-  max-width: 30rem;
-  border-radius: 1rem;
-  background: linear-gradient(145deg, #1a1a1a, #222);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-  color: #fff;
-  transition: transform 0.3s ease, box-shadow 0.4s ease;
-  overflow: hidden;
-  position: relative;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-une__card::before {
@@ -38,32 +46,23 @@
 }
 
 .movie-une__card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05); /* Zoom léger au survol */
+  box-shadow: 0 4px 8px rgb(255, 196, 0, 5); /* Ombre subtile */
 }
 
 .movie-une__card img {
   width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 0.8rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-  z-index: 1;
+  height: auto;
+  border-radius: 8px; /* Coins arrondis pour l'image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile pour l'image */
 }
 
-.movie-une__card:hover img {
-  transform: scale(1.02);
-}
-
-.movie-une__card__title {
-  font-size: 2rem;
-  font-weight: 700;
+.movie-une__card-titre{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd700; /* Titre jaune */
   text-align: center;
-  color: #ff4e00;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
-  margin-top: 4rem;
-  z-index: 1;
+  margin-top: 1rem;
 }
 
 .movie-une__card__nom {
@@ -71,36 +70,26 @@
   font-weight: 600;
   text-align: center;
   margin-top: 1rem;
-  color: #f0f0f0;
+  color: #ffd700;
   z-index: 1;
 }
 
 .movie-une__card__description {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: #e0e0e0; /* Texte gris clair */
   text-align: center;
-  color: #b0b0b0;
-  line-height: 1.6;
-  max-width: 90%;
-  z-index: 1;
+  line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-  .enAvant {
-    padding: 1.5rem;
-    gap: 1rem;
-  }
+.movie-une__title{
 
-  .enAvant__title {
-    font-size: 1.6rem;
-  }
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700; /* Titre jaune */
+  text-align: center;
+  margin-top: 1.5rem;
 
-  .enAvant__nom {
-    font-size: 1.3rem;
-  }
-
-  .enAvant__description {
-    font-size: 1rem;
-  }
 }
 
-  
+
+

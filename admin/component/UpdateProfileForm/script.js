@@ -1,10 +1,9 @@
-
-
 let templateFile = await fetch('./component/UpdateProfileForm/template.html');
 let template = await templateFile.text();
 
 
 let updateProfileForm = {};
+
 
 updateProfileForm.format = function(handler, hProfile) {
     let html= template;

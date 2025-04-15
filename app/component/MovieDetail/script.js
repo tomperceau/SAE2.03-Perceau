@@ -15,7 +15,6 @@ MovieDetail.format = function (movie) {
     movieHtml = movieHtml.replace("{{trailer}}", movie.trailer);
 
 
-
   return movieHtml;
 };
 
