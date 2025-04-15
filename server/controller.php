@@ -133,3 +133,12 @@ function removeFavorisController() {
       return ["error" => "Impossible de supprimer le film des favoris."];
   }
 }
+
+
+function readUneMovieController()
+{
+$data = getUneMovie();
+return $data ? $data : [];
+}
+
+

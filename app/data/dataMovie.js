@@ -42,6 +42,13 @@ DataMovie.requestCategory = async function () {
     let data = await answer.json();
     return data;
   };
-  
+
+  DataMovie.UneMovies = async function () {
+    let answer = await fetch(
+      HOST_URL + "/server/script.php?todo=getUneMovie");
+    let movies = await answer.json();
+    return movies;
+  };
+
 export { DataMovie };
 

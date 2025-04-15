@@ -220,3 +220,15 @@ function isFavoris($id_movie, $id_user) {
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+
+
+    function getUneMovie(){
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT id,name,image,description FROM Movie WHERE une = 1";
+        $stmt = $cnx->query($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res; 
+    }
+

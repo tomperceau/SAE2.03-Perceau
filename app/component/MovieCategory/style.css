@@ -5,9 +5,9 @@
     padding: 2rem;
     width: 90%; /* Ajuste la largeur */
     max-width: 1200px; /* Limite la largeur maximale */
-    background-color: #2c2c2c; /* Fond sombre */
+    background-color: black; /* Fond sombre */
     border-radius: 1rem; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    box-shadow: 0 4px 8px rgb(255, 196, 0, 5); /* Ombre subtile */
     transition: transform 0.3s ease;
 }
 
@@ -26,4 +26,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem; /* Espacement entre les films */
+}
+
+body{
+    background-color: black;
 }

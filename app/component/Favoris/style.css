@@ -3,7 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem; /* Espacement entre les éléments */
-    background-color: #3C3C3C;
+    background-color: black; /* Fond sombre */
     padding: 1rem; /* Uniformisez le padding */
     font-family: Arial, Helvetica, sans-serif;
     width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
