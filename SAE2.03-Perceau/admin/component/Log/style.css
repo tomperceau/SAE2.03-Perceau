@@ -1,0 +1,56 @@
+body{
+  background-color: black;
+}
+
+.log{
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+    background-color: black; /* Fond optionnel pour le conteneur */ 
+}
+
+.log-container{
+  display: flex;
+  align-items: flex-end;
+  width: 30rem;
+  height: 8rem;
+  padding: 1rem 1rem 1rem 1.5rem;
+background-color: #2C2C2C;
+  border-style: solid;
+  border-color: #FFD700;
+  border-width: 1px;
+  overflow: hidden;
+  .log__list {
+    font-size: smaller;
+    color: #FFD700;
+    overflow-y: scroll;
+    .last {
+      animation: fondu-en-entree 1s ease-in-out;
+    }
+
+    .clignotant {
+      animation: clignotement 2.5s infinite;
+    }
+  }
+}
+
+@keyframes fondu-en-entree {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes clignotement {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

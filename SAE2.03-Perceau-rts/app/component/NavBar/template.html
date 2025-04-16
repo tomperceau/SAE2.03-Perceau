@@ -1,0 +1,22 @@
+<nav class="navbar font-sans">
+  <ul class="navbar__list">
+    <li class="navbar__item" onclick="C.Accueil()">Accueil</li>
+    <li class="navbar__item" onclick="C.readFavoris()">Favoris</li>
+  </ul>
+
+  <div class="navbar__profile">
+    <div class="navbar__profile">
+      <label for="profile-select" class="navbar__label"></label>
+      <select id="profile-select" class="navbar__select" onchange="{{handler}}">
+        <option value="" disabled selected>Profils</option>
+        {{profile}}
+      </select>
+  
+      <img
+        id="profile-image"
+        class="navbar__image"
+        src="https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/default.avif"
+        alt="Photo de profil"
+      />
+  </div>
+</nav> 

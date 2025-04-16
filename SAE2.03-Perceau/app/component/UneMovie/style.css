@@ -1,0 +1,95 @@
+.movie-une {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: black; /* Fond noir */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
+}
+.movie-une__container {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: black; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie-une__card {
+  background-color: black; /* Fond légèrement plus clair */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
+  padding: 1.5rem;
+  width: 18rem; /* Largeur fixe des cartes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-une__card::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  transform: rotate(15deg);
+}
+
+.movie-une__card:hover {
+  transform: scale(1.05); /* Zoom léger au survol */
+  box-shadow: 0 4px 8px rgb(255, 196, 0, 5); /* Ombre subtile */
+}
+
+.movie-une__card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Coins arrondis pour l'image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile pour l'image */
+}
+
+.movie-une__card-titre{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd700; /* Titre jaune */
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.movie-une__card__nom {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+  color: #ffd700;
+  z-index: 1;
+}
+
+.movie-une__card__description {
+  font-size: 1rem;
+  color: #e0e0e0; /* Texte gris clair */
+  text-align: center;
+  line-height: 1.5;
+}
+
+.movie-une__title{
+
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700; /* Titre jaune */
+  text-align: center;
+  margin-top: 1.5rem;
+
+}
+
+
+

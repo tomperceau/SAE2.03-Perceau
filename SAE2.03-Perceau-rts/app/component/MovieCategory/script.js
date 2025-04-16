@@ -1,0 +1,28 @@
+import { Movie } from "../Movie/script.js";
+
+let templateFile = await fetch("./component/MovieCategory/template.html");
+let template = await templateFile.text();
+
+let MovieCategory = {};
+
+MovieCategory.format = function (category) {
+  let categoryHtml = template;
+
+  // Remplace le nom de la catégorie
+  categoryHtml = categoryHtml.replace("{{name}}", category.name);
+
+  // Remplace l'ID unique pour le carrousel
+  categoryHtml = categoryHtml.replaceAll("{{id}}", `carousel-${category.id}`);
+
+  // Génère le HTML pour les films
+  let moviesListHtml = category.movies
+  .map(movie => Movie.format([movie])) // Movie.format attend un tableau
+  .join("");
+
+  // Remplace les films dans le template
+  categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
+
+  return categoryHtml;
+};
+
+export { MovieCategory };

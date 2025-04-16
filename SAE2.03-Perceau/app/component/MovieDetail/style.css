@@ -1,0 +1,85 @@
+/* CSS BEM pour .moviedetail */
+.moviedetail {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 50rem;
+  background-color: black; /* Fond sombre */
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+  color: #ffffff; /* Texte blanc */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.moviedetail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Espacement entre l'image et le contenu */
+  width: 100%;
+  align-items: flex-start; /* Aligne les éléments en haut */
+}
+
+.moviedetail__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.moviedetail__poster {
+  max-width: 300px; /* Taille maximale de l'image */
+  border-radius: 1rem;
+}
+
+.moviedetail__poster-img {
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.moviedetail__info {
+  display: flex;
+
+  justify-content: center;
+  gap: 1rem; /* Espacement entre les éléments */
+}
+
+.moviedetail__meta {
+display: flex;
+flex-direction: column;
+
+gap: 4rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+
+}
+
+
+
+
+.moviedetail__description {
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 50rem; 
+  text-align: justify;
+  color: #cccccc; /* Couleur légèrement plus claire pour le texte */
+}
+
+.moviedetail__trailer {
+  width: 100%; /* La vidéo prend toute la largeur du parent */
+  height: auto; /* Ajuste la hauteur automatiquement */
+  margin-top: 2rem;
+  border-radius: 0.5rem; /* Coins légèrement arrondis */
+  display: flex;
+  justify-content: center;
+}
+
+.moviedetail__trailer-iframe {
+  width: 100%;
+  max-width: 40rem;
+height: 20rem;
+  border-radius: 1rem;;
+}
