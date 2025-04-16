@@ -16,10 +16,10 @@ MovieCategory.format = function (category) {
   categoryHtml = categoryHtml.replaceAll("{{id}}", uniqueId);
 
   // Génère le HTML pour les films
-  let moviesListHtml = category.movies
-  .map(movie => Movie.format([movie])) // Movie.format attend un tableau
-  .join("");
-
+  let moviesListHtml = "";
+  for (let movie of category.movies) {
+    moviesListHtml += Movie.format([movie]);
+  }
   // Remplace les films dans le template
   categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
 
