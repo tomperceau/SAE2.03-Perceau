@@ -58,15 +58,14 @@
 
 
     C.Accueil = function () {
+
       if (C.profile) {
         C.getMovie(C.profile.age);
       } else {
         document.querySelector("#content").innerHTML =
-          "<p>Veuillez sélectionner un profil.</p>";
-      }
+        C.getMovie();      }
       C.getUneMovie();
     };
-
 
     C.getCategories = async function () {
       let categories = await DataMovie.requestMovies(99);

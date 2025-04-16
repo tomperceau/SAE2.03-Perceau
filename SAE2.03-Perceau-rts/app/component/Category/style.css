@@ -1,4 +1,25 @@
 
+.category-card {
+  height: 16.875rem; /* Contrôle la largeur */
+  width: 25.938rem; /* Contrôle la hauteur */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+
 .category-container {
   display: flex;
   flex-direction: column;
@@ -59,10 +80,4 @@
 }
 .carousel__button--right {
   right: 0.5rem;
-}
-
-
-.category-card{
-
-  width: 50rem;
 }

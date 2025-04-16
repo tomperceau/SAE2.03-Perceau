@@ -7,8 +7,13 @@
     max-width: 1200px; /* Limite la largeur maximale */
     background-color: black; /* Fond sombre */
     border-radius: 1rem; /* Coins arrondis */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.movie-categories:hover{
+
+    transform: scale(1.05); /* Zoom léger au survol */
     box-shadow: 0 4px 8px rgb(255, 196, 0, 5); /* Ombre subtile */
-    transition: transform 0.3s ease;
+
 }
 
 .movie-categories__titre {
@@ -18,7 +23,6 @@
     font-size: 2rem;
     font-weight: 700;
     color: #d9ff00; /* Couleur vive pour le titre */
-    border-left: 4px solid #d9ff00; /* Barre colorée */
 }
 
 .movie-categories__movies {

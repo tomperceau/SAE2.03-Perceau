@@ -3,8 +3,6 @@ let template = await templateFile.text();
 
 let Category = {};
 
-
-
 const colorMap = {
   "Action": "#e74c3c",
   "Comédie": "#f1c40f",
@@ -23,22 +21,25 @@ Category.format = function (categories) {
     console.error("Les catégories reçues ne sont pas un tableau :", categories);
     return "";
   }
-  
+
   let categoryHtml = template;
-  const uniqueId = `carousel-categories`;
+  const uniqueId = `carousel-categories`; // Remis entre backticks
+
   categoryHtml = categoryHtml.replaceAll("{{id}}", uniqueId);
   
+
   let cards = "";
   for (let cat of categories) {
     let color = colorMap[cat.name] || "#333";
     cards += `
-      <div class="category-card" style="background-color: ${color}">
+      <div class="category-card" style="background-color: ${color};" onclick="C.handlerCategory('${cat.name}')">
         <h3>${cat.name}</h3>
       </div>
     `;
   }
-  
+
   categoryHtml = categoryHtml.replace("{{category}}", cards);
   return categoryHtml;
 };
+
 export { Category };

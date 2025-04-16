@@ -61,12 +61,13 @@ C.getCategory();
 
 
     C.Accueil = function () {
+        document.querySelector("#category").style.display = "block";
+
       if (C.profile) {
         C.getMovie(C.profile.age);
       } else {
         document.querySelector("#content").innerHTML =
-          "<p>Veuillez sélectionner un profil.</p>";
-      }
+        C.getMovie();      }
       C.getUneMovie();
     };
 
@@ -83,6 +84,10 @@ C.getCategory();
 
 
     C.handlerDetail = async function (id) {
+      document.querySelector("#category").style.display = "none";
+
+            document.querySelector("#Une").innerHTML = "";
+
       console.log("ID reçu :", id);
       let details = await DataMovie.requestMovieDetail(id);
       console.log("Détails du film :", details);
@@ -104,6 +109,7 @@ C.getCategory();
         profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/${C.profile.image}`;
       }
       C.getMovie(C.profile.age);
+      C.getCategory();
     };
 
 
@@ -165,6 +171,8 @@ C.getCategory();
         alert("Veuillez sélectionner un profil.");
         return;
       }
+      document.querySelector("#category").style.display = "none";
+
       document.querySelector("#Une").innerHTML = "";
       let response = await fetch(
         `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=getFavoris&id_user=${C.profile.id}`
@@ -177,7 +185,26 @@ C.getCategory();
       }
       content.innerHTML = Favoris.format(favoris);
     };
+    C.handlerCategory = async function (name) {
+  const allMovies = await DataMovie.requestMovies(99); // ou autre valeur si tu veux adapter à l'âge plus tard
 
+  const selectedCategory = allMovies.find(cat => cat.name.toLowerCase() === name.toLowerCase());
+
+  if (!selectedCategory) {
+    document.querySelector("#content").innerHTML = `<p>Aucune catégorie trouvée pour ${name}</p>`;
+    return;
+  }
+
+  // Efface les autres sections
+  document.querySelector("#Une").innerHTML = "";
+  document.querySelector("#category").innerHTML = "";
+
+  // Affiche la catégorie sélectionnée
+  document.querySelector("#content").innerHTML = MovieCategory.format(selectedCategory);
+
+  // Scroll vers le haut
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
     C.scrollLeft = function (id) {
   console.log(`Scrolling left for ID: ${id}`);
   const track = document.getElementById(id);
@@ -185,7 +212,7 @@ C.getCategory();
     console.error(`Element with ID '${id}' not found.`);
     return;
   }
-  track.scrollBy({ left: -300, behavior: "smooth" });
+  track.scrollBy({ left: -415.008, behavior: "smooth" });
 };
 
 C.scrollRight = function (id) {
@@ -195,7 +222,7 @@ C.scrollRight = function (id) {
     console.error(`Element with ID '${id}' not found.`);
     return;
   }
-  track.scrollBy({ left: 300, behavior: "smooth" }); // Défiler vers la droite
+  track.scrollBy({ left: 415.008, behavior: "smooth" }); // Défiler vers la droite
 };
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
