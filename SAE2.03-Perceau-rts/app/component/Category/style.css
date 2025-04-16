@@ -1,8 +1,5 @@
 
-
-
-
-.movie-category-container {
+.category-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -11,7 +8,7 @@
   overflow: hidden; /* Cache les débordements */
 }
 
-.movie-category {
+.category {
   width: 100%;
   box-sizing: border-box;
 }
@@ -62,4 +59,10 @@
 }
 .carousel__button--right {
   right: 0.5rem;
+}
+
+
+.category-card{
+
+  width: 50rem;
 }

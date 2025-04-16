@@ -27,6 +27,11 @@ function readMoviesByCategoryController() {
   return $categories ? $categories : false;
 }
 
+function readCategoryController() {
+  $categories = getCategory();
+  return $categories;
+}
+
 function addController() {
 
       $name = $_REQUEST['name'] ?? null;

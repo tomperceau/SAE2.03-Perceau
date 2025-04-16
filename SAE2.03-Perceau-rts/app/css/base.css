@@ -10,3 +10,4 @@
 @import "../component/MovieCategory/style.css" layer(components);
 @import "../component/UneMovie/style.css" layer(components);
 @import "../component/Favoris/style.css" layer(components);
+@import "../component/Category/style.css" layer(components);

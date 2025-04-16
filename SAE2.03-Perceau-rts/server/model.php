@@ -29,6 +29,15 @@ function getAllMovies() {
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+function getCategory() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Category.id, Category.name
+            FROM Category";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
 
 function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age) {
 

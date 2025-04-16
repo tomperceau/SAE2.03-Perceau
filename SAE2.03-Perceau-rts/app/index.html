@@ -12,6 +12,7 @@
   <header id="header"></header>
   <h1 class='movie-une__title'> Notre sélection pour vous </h1>
   <section class="movie-une" id="Une"></section>
+  <section id="category"></section>
   <section class="cards" id="content"></section>
 
 
@@ -22,8 +23,10 @@
     import { Movie } from "./component/Movie/script.js";
     import { MovieDetail } from "./component/MovieDetail/script.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
+    import { Category } from "./component/Category/script.js";
     import { DataMovie } from "./data/dataMovie.js";
     import { DataProfile } from "./data/dataProfile.js";
+    import { Data } from "./data/dataCategory.js";
     import { Favoris } from "./component/Favoris/script.js";
 
 
@@ -41,7 +44,7 @@
       V.renderNavBar("C.handlerMovies", "C.handlerProfile", profiles);
       C.getMovie();
       C.getCategories();
-
+C.getCategory();
       C.getUneMovie();
     };
 
@@ -108,7 +111,11 @@
       let data = await DataMovie.UneMovies();
       V.renderUneMovie(data);
     };
-
+    C.getCategory = async function () {
+  let data = await Data.readCategory();
+  console.log("Catégories récupérées :", data);
+  V.renderCategory(data);
+};
 
     C.addFavoris = async function (id_movie) {
       if (!C.profile) {
@@ -224,6 +231,11 @@ C.scrollRight = function (id) {
       content.innerHTML = formattedContent;
     };
 
+
+    V.renderCategory = function (data) {
+      let content = document.querySelector("#category");
+      content.innerHTML = Category.format(data);
+    };
 
     V.renderUneMovie = function (data) {
       let content = document.querySelector("#Une");

@@ -12,16 +12,14 @@
 
 .movie-card {
     position: relative;
-    width: 16.875rem; /* Largeur ajustable */
-    height: 25.938rem; /* Hauteur ajustable */
+    width: 16.875rem; /* Contrôle la largeur */
+    height: 25.938rem; /* Contrôle la hauteur */
     overflow: hidden;
-    border-radius: 1rem; /* Coins arrondis */
+    border-radius: 1rem;
     cursor: pointer;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex: 0 0 250px; /* Largeur fixe pour chaque film */
-    min-width: 400px;
-    max-width: 250px;
+    flex: 0 0 auto; /* Laisse la largeur du .movie-card faire autorité */
     box-sizing: border-box;
     
 }

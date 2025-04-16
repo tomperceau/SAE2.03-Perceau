@@ -67,6 +67,9 @@ if ( isset($_REQUEST['todo']) ){
     case 'readMoviesCategory':
       $data = readMoviesByCategoryController();
       break;
+    case 'readCategory':
+      $data = readCategoryController();
+      break;
       
       case'readMovieDetail':
         $data = readMovieDetailController();
