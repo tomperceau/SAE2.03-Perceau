@@ -12,7 +12,8 @@ MovieCategory.format = function (category) {
   categoryHtml = categoryHtml.replace("{{name}}", category.name);
 
   // Remplace l'ID unique pour le carrousel
-  categoryHtml = categoryHtml.replaceAll("{{id}}", `carousel-${category.id}`);
+  const uniqueId = `carousel-${category.name.replace(/\s+/g, "-").toLowerCase()}`;
+  categoryHtml = categoryHtml.replaceAll("{{id}}", uniqueId);
 
   // Génère le HTML pour les films
   let moviesListHtml = category.movies
