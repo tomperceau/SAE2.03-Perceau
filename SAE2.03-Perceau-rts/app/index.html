@@ -18,7 +18,6 @@
   </main>
 
 
-  <!-- <section class="moviedetail" id="content"></section> -->
 
   <script type="module">
     import { NavBar } from "./component/NavBar/script.js";
@@ -70,7 +69,7 @@
 
 
     C.Accueil = function () {
-  C.toggleMainTitle(true); // ← affiche le titre
+  C.toggleMainTitle(true);
 
   document.querySelector("#category").style.display = "block";
   if (C.profile) {
@@ -84,18 +83,18 @@
 
 
     C.getCategories = async function () {
-      let categories = await DataMovie.requestMovies(99);
-      if (!Array.isArray(categories) || categories.length === 0) {
-        document.querySelector("#content").innerHTML =
-          "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
-        return;
-      }
-      V.renderMovieCategory(categories);
-    };
+  let categories = await DataMovie.requestMovies(99);
+  if (!Array.isArray(categories) || categories.length === 0) {
+    document.querySelector("#content").innerHTML =
+      "<p>Aucune catégorie disponible pour votre tranche d'âge.</p>";
+    return;
+  }
+  V.renderMovieCategory(categories);
+};
 
 
     C.handlerDetail = async function (id) {
-  C.toggleMainTitle(false); // ← cache le titre
+  C.toggleMainTitle(false);
 
   document.querySelector("#category").style.display = "none";
   document.querySelector("#Une").innerHTML = "";
@@ -105,158 +104,143 @@
 };
 
     C.handlerProfile = async function () {
-      const select = document.querySelector("#profile-select");
-      const profileImage = document.querySelector("#profile-image");
-      if (!select.value) {
-        profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/default.avif`;
-      }
-      let dataProfile = await DataProfile.readOne(select.value);
-      C.profile = dataProfile[0];
-      if (C.profile && C.profile.image) {
-        profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/${C.profile.image}`;
-      }
-      C.getMovie(C.profile.age);
-      C.getCategory();
-    };
+  const select = document.querySelector("#profile-select");
+  const profileImage = document.querySelector("#profile-image");
+  if (!select.value) {
+    profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/default.avif`;
+  }
+  let dataProfile = await DataProfile.readOne(select.value);
+  C.profile = dataProfile[0];
+  if (C.profile && C.profile.image) {
+    profileImage.src = `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/${C.profile.image}`;
+  }
+  C.getMovie(C.profile.age);
+  C.getCategory();
+};
 
 
     C.getUneMovie = async function () {
-      let data = await DataMovie.UneMovies();
-      V.renderUneMovie(data);
-    };
+  let data = await DataMovie.UneMovies();
+  V.renderUneMovie(data);
+};
     C.getCategory = async function () {
   let data = await Data.readCategory();
-  console.log("Catégories récupérées :", data);
   V.renderCategory(data);
 };
 
     C.addFavoris = async function (id_movie) {
-      if (!C.profile) {
-        alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
-        return;
-      }
-      let response = await fetch(
-        `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=addFavoris&id_user=${C.profile.id}&id_movie=${id_movie}`
-      );
-      let result = await response.json();
+  if (!C.profile) {
+    alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
+    return;
+  }
+  let response = await fetch(
+    `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=addFavoris&id_user=${C.profile.id}&id_movie=${id_movie}`
+  );
+  let result = await response.json();
 
-      if (result.success) {
-        alert("Ajouté aux favoris !");
-        let button = document.querySelector(
-          `button[onclick="C.addFavoris(${id_movie})"]`
-        );
-        if (button) {
-          button.classList.add("is-favoris");
-        }
-      } else {
-        alert(result.error || "Erreur lors de l'ajout aux favoris.");
-      }
-    };
+  if (result.success) {
+    alert("Ajouté aux favoris !");
+    let button = document.querySelector(
+      `button[onclick="C.addFavoris(${id_movie})"]`
+    );
+    if (button) {
+      button.classList.add("is-favoris");
+    }
+  } else {
+    alert(result.error || "Erreur lors de l'ajout aux favoris.");
+  }
+};
 
 
     C.removeFavoris = async function (id_movie) {
-      if (!C.profile) {
-        alert(
-          "Veuillez sélectionner un profil avant de supprimer un favori."
-        );
-        return;
-      }
-      let response = await fetch(
-        `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=removeFavoris&id_user=${C.profile.id}&id_movie=${id_movie}`);
-      let result = await response.json();
-      if (result.success) {
-        alert("Supprimé des favoris !");
-        C.readFavoris();
-      } else {
-        alert(result.error || "Erreur lors de la suppression du favori.");
-      }
-    };
+  if (!C.profile) {
+    alert("Veuillez sélectionner un profil avant de supprimer un favori.");
+    return;
+  }
+  let response = await fetch(
+    `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=removeFavoris&id_user=${C.profile.id}&id_movie=${id_movie}`
+  );
+  let result = await response.json();
+  if (result.success) {
+    alert("Supprimé des favoris !");
+    C.readFavoris();
+  } else {
+    alert(result.error || "Erreur lors de la suppression du favori.");
+  }
+};
 
 
     C.readFavoris = async function () {
-      C.toggleMainTitle(false); // ← cache le titre
+  C.toggleMainTitle(false);
 
-      if (!C.profile) {
-        alert("Veuillez sélectionner un profil.");
-        return;
-      }
-      document.querySelector("#category").style.display = "none";
+  if (!C.profile) {
+    alert("Veuillez sélectionner un profil.");
+    return;
+  }
+  document.querySelector("#category").style.display = "none";
 
-      document.querySelector("#Une").innerHTML = "";
-      let response = await fetch(
-        `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=getFavoris&id_user=${C.profile.id}`
-      );
-      let favoris = await response.json();
-      let content = document.querySelector("#content");
-      if (!favoris || favoris.length === 0) {
-        content.innerHTML = "<p>Votre liste de favoris est vide.</p>";
-        return;
-      }
-      content.innerHTML = Favoris.format(favoris);
-    };
+  document.querySelector("#Une").innerHTML = "";
+  let response = await fetch(
+    `https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/script.php?todo=getFavoris&id_user=${C.profile.id}`
+  );
+  let favoris = await response.json();
+  let content = document.querySelector("#content");
+  if (!favoris || favoris.length === 0) {
+    content.innerHTML = "<p>Votre liste de favoris est vide.</p>";
+    return;
+  }
+  content.innerHTML = Favoris.format(favoris);
+};
     C.handlerCategory = async function (name) {
-      C.toggleMainTitle(false); // ← cache le titre
+  C.toggleMainTitle(false);
 
-  const allMovies = await DataMovie.requestMovies(99); // ou autre valeur si tu veux adapter à l'âge plus tard
+  const allMovies = await DataMovie.requestMovies(99);
 
-  const selectedCategory = allMovies.find(cat => cat.name.toLowerCase() === name.toLowerCase());
+  const selectedCategory = allMovies.find(
+    (cat) => cat.name.toLowerCase() === name.toLowerCase()
+  );
 
   if (!selectedCategory) {
     document.querySelector("#content").innerHTML = `<p>Aucune catégorie trouvée pour ${name}</p>`;
     return;
   }
 
-  // Efface les autres sections
   document.querySelector("#Une").innerHTML = "";
   document.querySelector("#category").innerHTML = "";
 
-  // Affiche la catégorie sélectionnée
-  document.querySelector("#content").innerHTML = MovieCategory.format(selectedCategory);
+  document.querySelector("#content").innerHTML = MovieCategory.format(
+    selectedCategory
+  );
 
-  // Scroll vers le haut
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 C.scrollLeft = function (id) {
-  console.log(`Scrolling left for ID: ${id}`);
   const track = document.getElementById(id);
-  if (!track) {
-    console.error(`Element with ID '${id}' not found.`);
-    return;
-  }
+  if (!track) return;
 
-  // Trouve la largeur d'une carte
-  const card = track.querySelector(".category-card, .movie-category__card, .movie-une__card");
-  if (!card) {
-    console.error("No card found in the carousel.");
-    return;
-  }
+  const card = track.querySelector(
+    ".category-card, .movie-category__card, .movie-une__card"
+  );
+  if (!card) return;
 
-  // Calcul de la largeur d'une carte + gap
-  const cardWidth = card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
+  const cardWidth =
+    card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
 
-  // Défiler vers la gauche
   track.scrollBy({ left: -cardWidth, behavior: "smooth" });
 };
 
 C.scrollRight = function (id) {
-  console.log(`Scrolling right for ID: ${id}`);
   const track = document.getElementById(id);
-  if (!track) {
-    console.error(`Element with ID '${id}' not found.`);
-    return;
-  }
+  if (!track) return;
 
-  // Trouve la largeur d'une carte
-  const card = track.querySelector(".category-card, .movie-category__card, .movie-une__card");
-  if (!card) {
-    console.error("No card found in the carousel.");
-    return;
-  }
+  const card = track.querySelector(
+    ".category-card, .movie-category__card, .movie-une__card"
+  );
+  if (!card) return;
 
-  // Calcul de la largeur d'une carte + gap
-  const cardWidth = card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
+  const cardWidth =
+    card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
 
-  // Défiler vers la droite
   track.scrollBy({ left: cardWidth, behavior: "smooth" });
 };
     // Vue (contient tout ce qui est relatif à l'affichage)

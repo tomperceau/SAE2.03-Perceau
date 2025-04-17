@@ -1,11 +1,11 @@
 <div class="movie-category">
   <h2 class="movie-category__title">{{name}}</h2>
-  <div class="carousel">
-    <button class="carousel__button carousel__button--left" onclick="C.scrollLeft('{{id}}')">&#8249;</button>
-    <div class="carousel__track" id="{{id}}">
+  <div class="movie-category__carousel">
+    <button class="movie-category__carousel-button movie-category__carousel-button--left" onclick="C.scrollLeft('{{id}}')">&#8249;</button>
+    <div class="movie-category__carousel-track" id="{{id}}">
       {{movie}}
     </div>
-    <button class="carousel__button carousel__button--right" onclick="C.scrollRight('{{id}}')">&#8250;</button>
+    <button class="movie-category__carousel-button movie-category__carousel-button--right" onclick="C.scrollRight('{{id}}')">&#8250;</button>
   </div>
 </div>
 

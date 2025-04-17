@@ -3,13 +3,13 @@
   box-sizing: border-box;
 }
 
-.carousel {
+.movie-category__carousel {
   position: relative;
   overflow: hidden;
   padding: 1rem 0;
 }
 
-.carousel__track {
+.movie-category__carousel-track {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
@@ -17,11 +17,11 @@
   scrollbar-width: none;
 }
 
-.carousel__track::-webkit-scrollbar {
+.movie-category__carousel-track::-webkit-scrollbar {
   display: none;
 }
 
-.carousel__button {
+.movie-category__carousel-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -41,14 +41,14 @@
   padding: 0;
 }
 
-.carousel__button:hover {
+.movie-category__carousel-button:hover {
   background-color: rgba(230, 8, 8, 0.8);
 }
 
-.carousel__button--left {
+.movie-category__carousel-button--left {
   left: 0.5rem;
 }
 
-.carousel__button--right {
+.movie-category__carousel-button--right {
   right: 0.5rem;
 }
