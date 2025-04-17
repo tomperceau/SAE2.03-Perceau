@@ -1,7 +1,6 @@
-
 .category-card {
-  height: 10.875rem; /* Contrôle la largeur */
-  width: 16.938rem; /* Contrôle la hauteur */
+  height: 10.875rem;
+  width: 16.938rem;
   border-radius: 12px;
   flex-shrink: 0;
   display: flex;
@@ -9,7 +8,7 @@
   justify-content: center;
   font-size: 1rem;
   font-weight: bold;
-  color: white;
+  color: var(--color-police);
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -18,14 +17,13 @@
   transform: scale(1.05);
 }
 
-
 .category-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: 100%;
   padding: 1rem;
-  overflow: hidden; /* Cache les débordements */
+  overflow: hidden;
 }
 
 .category {
@@ -44,11 +42,11 @@
   gap: 1rem;
   overflow-x: auto;
   scroll-behavior: smooth;
-
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
+
 .carousel__track::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 
 .carousel__button {
@@ -56,20 +54,21 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  background-color: white;
+  background-color: var(--color-police);
   border: none;
   color: var(--color-background);
   font-size: 2rem;
   cursor: pointer;
-  width: 3rem;      /* même largeur */
-  height: 3rem;     /* même hauteur */
-  border-radius: 50%; /* rond parfait */
-  display: flex;    /* centre l’icône */
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s;
-  padding: 0; /* enlève le padding qui déforme */
+  padding: 0;
 }
+
 .carousel__button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -77,8 +76,7 @@
 .carousel__button--left {
   left: 0.5rem;
 }
+
 .carousel__button--right {
   right: 0.5rem;
 }
-
-

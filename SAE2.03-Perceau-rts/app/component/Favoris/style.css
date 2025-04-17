@@ -1,15 +1,15 @@
 .cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem; /* Espacement entre les éléments */
-    background-color: var(--color-background);
-    padding: 1rem; /* Uniformisez le padding */
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-
-    scroll-margin-top: 5rem; /* Ajoutez également si nécessaire */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem; /* Espacement entre les éléments */
+  background-color: var(--color-background);
+  padding: 1rem; /* Uniformisez le padding */
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  padding-top: 5rem; /* Ajoutez le padding uniquement pour Favoris */
+  
 
 }
 
@@ -93,7 +93,7 @@
     top: 1rem;
     left: 1rem;
     background-color: rgba(0, 0, 0, 0.6);
-    color: white;
+    color: var(--color-police);
     border: none;
     border-radius: 50%;
     width: 2rem;
@@ -116,7 +116,7 @@
   top: 20px;
   right: 20px;
   background-color: #1a1a1a;
-  color: white;
+  color: var(--color-police);
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -157,13 +157,13 @@
 
 .removeFavoris_button {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #007bff;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: red;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  border-radius: 20%;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,23 +172,18 @@
 }
 
 .removeFavoris_button svg {
-  stroke: #ffffff; 
-  stroke-width: 2px;
-  fill: none; 
+  stroke: #ffffff;
+  stroke-width: 0.125rem;
+  fill: none;
   transition: stroke 0.3s ease, transform 0.2s ease;
 }
 
 .removeFavoris_button:hover {
-  background-color: #0056b3; 
-  transform: scale(1.1); 
+  background-color: #b10909;
+  transform: scale(1.1);
 }
 
 .removeFavoris_button:active {
-  background-color: #003f7f; 
-  transform: scale(0.95); 
-}
-
-
-.favoris{
-  padding-top:10rem;
+  background-color: #b10909;
+  transform: scale(0.95);
 }

@@ -1,129 +1,130 @@
 .cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem; /* Espacement entre les éléments */
-    background-color: black; /* Fond sombre */
-    padding: 1rem; /* Uniformisez le padding */
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: black;
+  padding: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .movie-card {
-    position: relative;
-    width: 16.875rem; /* Largeur ajustable */
-    height: 25.938rem; /* Hauteur ajustable */
-    overflow: hidden;
-    border-radius: 1rem; /* Coins arrondis */
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  width: 16.875rem;
+  height: 25.938rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-card:hover {
-    transform: scale(1.05); /* Zoom léger au survol */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Ombre plus marquée */
+  transform: scale(1.05);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 .movie-card_img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: filter 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
 }
 
 .movie-card:hover .movie-card_img {
-    filter: brightness(50%); /* Assombrit l'image au survol */
+  filter: brightness(50%);
 }
 
 .movie-card_title {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 1;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1;
 }
 
 .movie-card:hover .movie-card_title {
-    opacity: 1;
-    transform: translate(-50%, -50%);
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
-.card__favoris {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
-    color: var(--color-white);
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 2;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .card__favoris:hover {
-    background-color: rgba(255, 255, 255, 0.85);
-    color: var(--color-gray-darkest);
-    transform: scale(1.1);
-  }
-  
-  .card__favoris--liked {
-    color: red;
-    transform: scale(1.2);
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .card__delete {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 2;
-    transition: background-color 0.3s ease;
-  }
-  
-  .card__delete:hover {
-    background-color: rgba(255, 0, 0, 0.85);
-  }
 
-  .addFavoris_button {
+.card__favoris {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: var(--color-white);
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card__favoris:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: var(--color-gray-darkest);
+  transform: scale(1.1);
+}
+
+.card__favoris--liked {
+  color: red;
+  transform: scale(1.2);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card__delete {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.3s ease;
+}
+
+.card__delete:hover {
+  background-color: rgba(255, 0, 0, 0.85);
+}
+
+.addFavoris_button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
   background-color: #1a1a1a;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
   z-index: 3;
 }
 
@@ -133,14 +134,14 @@
 }
 
 .addFavoris_button .icon-bookmark {
-  fill: none; 
+  fill: none;
   stroke: white;
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
 .addFavoris_button.is-favoris .icon-bookmark {
-  fill: #007bff; 
-  stroke: #ffffff; 
+  fill: #007bff;
+  stroke: #ffffff;
 }
 
 .addFavoris_button .icon-bookmark {
@@ -152,35 +153,3 @@
   stroke: #fff;
 }
 
-.removeFavoris_button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #007bff;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.removeFavoris_button svg {
-  stroke: #ffffff; 
-  stroke-width: 2px;
-  fill: none; 
-  transition: stroke 0.3s ease, transform 0.2s ease;
-}
-
-.removeFavoris_button:hover {
-  background-color: #0056b3; 
-  transform: scale(1.1); 
-}
-
-.removeFavoris_button:active {
-  background-color: #003f7f; 
-  transform: scale(0.95); 
-}
