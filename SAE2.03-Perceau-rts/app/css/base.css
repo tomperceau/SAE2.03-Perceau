@@ -11,3 +11,23 @@
 @import "../component/UneMovie/style.css" layer(components);
 @import "../component/Favoris/style.css" layer(components);
 @import "../component/Category/style.css" layer(components);
+@import "../component/Footer/style.css" layer(components);
+
+.site-container{
+    padding-left: 0rem;
+    background-color: var(--color-background);
+}
+
+@media (min-width: 721px) {
+    .site-container {
+      padding-left: 5rem;
+    }
+  }
+
+
+  header{
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+  }
+

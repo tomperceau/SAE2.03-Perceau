@@ -1,14 +1,17 @@
 .navbar {
     position: sticky;
+    top: 0;
+    z-index: 1000; /* Assurez-vous qu'elle reste au-dessus des autres éléments */
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1a1a1a; /* Fond sombre */
-    color: #ffffff; /* Texte blanc */
+    padding: 1rem 2rem; /* 16px 32px */
+    background-color: var(--color-background); /* Fond sombre */
+    color: var(--color-police);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+    font-size: 1.2rem; /* 19.2px */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
 }
 
 .navbar__list {
@@ -20,33 +23,65 @@
 }
 
 .navbar__item {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem; /* 8px 16px */
     text-decoration: none;
-    color: #ffffff;
+    color: var(--color-police);
+    font-weight: 700;
     cursor: pointer;
     transition: color 0.3s ease, text-decoration 0.3s ease;
+    transition: opacity 0.3s ease, text-decoration 0.3s ease;
+}
+
+.navbar__accueil img {
+    padding: 0.5rem 1rem; /* 8px 16px */
+    cursor: pointer;
+    width: 10rem; /* 160px */
 }
 
 .navbar__item:hover {
-    color: #d9ff00; /* Couleur vive au survol */
-    text-decoration: underline;
+    opacity: 40%; 
 }
 
-.navbar-select {
+.navbar__select {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    border-radius: 0.4rem; /* 6.4px */
+    gap: 0.5rem; /* 8px */
+    font-weight: 700;
+
+    color: var(--color-police);
+    background-color: var(--color-background);
+}
+
+.navbar__profile {
+    display: flex;
+    gap: 1rem; /* 16px */
+}
+
+.navbar__select-profil {
+    background-color: var(--color-background);
 }
 
 .navbar__image {
-    width: 60px;
-    height: 60px;
+    width: 3.75rem; /* 60px */
+    height: 3.75rem; /* 60px */
     border-radius: 50%; /* Cercle parfait */
     object-fit: cover;
-    border: 2px solid #ffffff; /* Bordure blanche */
+    border: 0.125rem solid #ffffff; /* 2px */
     transition: transform 0.3s ease;
 }
 
 .navbar__image:hover {
     transform: scale(1.1); /* Zoom léger au survol */
+}
+
+.navbar {
+    padding-left: 0rem;
+    background-color: var(--color-background);
+}
+
+@media (min-width: 45.0625rem) { /* 721px */
+    .navbar {
+        padding-left: 5rem; /* 80px */
+    }
 }

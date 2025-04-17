@@ -18,8 +18,9 @@ MovieCategory.format = function (category) {
   // Génère le HTML pour les films
   let moviesListHtml = "";
   for (let movie of category.movies) {
-    moviesListHtml += Movie.format([movie]);
+    moviesListHtml += `<div class="movie-category__card">${Movie.format([movie])}</div>`;
   }
+
   // Remplace les films dans le template
   categoryHtml = categoryHtml.replace("{{movie}}", moviesListHtml);
 

@@ -5,10 +5,9 @@
   margin: 2rem auto;
   padding: 2rem;
   width: 100%;
-  max-width: 50rem;
-  background-color: black; /* Fond sombre */
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
+  max-width: 50rem; /* 800px */
+  background-color: var(--color-background);
+  border-radius: 1rem; /* 16px */
   color: #ffffff; /* Texte blanc */
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -16,54 +15,49 @@
 .moviedetail__content {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* Espacement entre l'image et le contenu */
+  gap: 2rem; /* 32px */
   width: 100%;
   align-items: flex-start; /* Aligne les éléments en haut */
 }
 
 .moviedetail__title {
-  font-size: 2.5rem;
+  padding-top: 3rem; /* 48px */
+  font-size: 2.5rem; /* 40px */
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; /* 16px */
   text-align: left;
 }
 
 .moviedetail__poster {
-  max-width: 300px; /* Taille maximale de l'image */
-  border-radius: 1rem;
+  max-width: 18.75rem; /* 300px */
+  border-radius: 1rem; /* 16px */
 }
 
 .moviedetail__poster-img {
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 1rem; /* 16px */
 }
 
 .moviedetail__info {
   display: flex;
-
   justify-content: center;
-  gap: 1rem; /* Espacement entre les éléments */
+  gap: 1rem; /* 16px */
 }
 
 .moviedetail__meta {
-display: flex;
-flex-direction: column;
-
-gap: 4rem;
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* 64px */
+  font-size: 1rem; /* 16px */
   font-weight: bold;
   color: #ffffff;
-  margin-bottom: 0.5rem;
-
+  margin-bottom: 0.5rem; /* 8px */
 }
 
-
-
-
 .moviedetail__description {
-  font-size: 1rem;
+  font-size: 1rem; /* 16px */
   line-height: 1.8;
-  max-width: 50rem; 
+  max-width: 50rem; /* 800px */
   text-align: justify;
   color: #cccccc; /* Couleur légèrement plus claire pour le texte */
 }
@@ -71,15 +65,15 @@ gap: 4rem;
 .moviedetail__trailer {
   width: 100%; /* La vidéo prend toute la largeur du parent */
   height: auto; /* Ajuste la hauteur automatiquement */
-  margin-top: 2rem;
-  border-radius: 0.5rem; /* Coins légèrement arrondis */
+  margin-top: 2rem; /* 32px */
+  border-radius: 0.5rem; /* 8px */
   display: flex;
   justify-content: center;
 }
 
 .moviedetail__trailer-iframe {
   width: 100%;
-  max-width: 40rem;
-height: 20rem;
-  border-radius: 1rem;;
+  max-width: 40rem; /* 640px */
+  height: 20rem; /* 320px */
+  border-radius: 1rem; /* 16px */
 }

@@ -1,34 +1,23 @@
-
-
-
-
-.movie-category-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  padding: 1rem;
-  overflow: hidden; /* Cache les débordements */
-}
-
 .movie-category {
   width: 100%;
   box-sizing: border-box;
+
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 1rem 0; /* 16px 0 */
 }
 
 .carousel__track {
   display: flex;
-  gap: 1rem;
+  gap: 1rem; /* 16px */
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 1rem;
+
   scrollbar-width: none; /* Firefox */
+  margin-top: 5rem;
 }
 .carousel__track::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
@@ -42,12 +31,13 @@
   background-color: white;
   border: none;
   color: var(--color-background);
-  font-size: 2rem;
+  font-size: 2rem; /* 32px */
   cursor: pointer;
-  width: 3rem;      /* même largeur */
-  height: 3rem;     /* même hauteur */
+
+  width: 3rem; /* 48px */
+  height: 3rem; /* 48px */
   border-radius: 50%; /* rond parfait */
-  display: flex;    /* centre l’icône */
+  display: flex; /* centre l’icône */
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s;
@@ -58,8 +48,8 @@
 }
 
 .carousel__button--left {
-  left: 0.5rem;
+  left: 0.5rem; /* 8px */
 }
 .carousel__button--right {
-  right: 0.5rem;
+  right: 0.5rem; /* 8px */
 }

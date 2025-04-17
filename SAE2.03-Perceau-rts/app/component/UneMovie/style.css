@@ -1,95 +1,90 @@
-.movie-une {
-  display: flex !important;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
-  background-color: black; /* Fond noir */
-  border-radius: 10px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-}
-.movie-une__container {
-  display: flex !important;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
-  background-color: black; 
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
+/* Styles par défaut pour les petits écrans (mobile) */
 .movie-une__card {
-  background-color: black; /* Fond légèrement plus clair */
-  border-radius: 10px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-  padding: 1.5rem;
-  width: 18rem; /* Largeur fixe des cartes */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie-une__card::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-  z-index: 0;
-  pointer-events: none;
-  transform: rotate(15deg);
-}
-
-.movie-une__card:hover {
-  transform: scale(1.05); /* Zoom léger au survol */
-  box-shadow: 0 4px 8px rgb(255, 196, 0, 5); /* Ombre subtile */
+  position: relative;
+  min-width: 100%;
+  flex-shrink: 0;
+  height: auto; /* Laisse la hauteur être calculée en fonction de l'aspect-ratio */
+  aspect-ratio: 18 / 7; /* Ratio 18:7 pour les films */
+  overflow: hidden;
+  border-radius: 0.625rem; /* 10px */
+  margin-top: 6rem;
 }
 
 .movie-une__card img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  border-radius: 8px; /* Coins arrondis pour l'image */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre subtile pour l'image */
-}
-
-.movie-une__card-titre{
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffd700; /* Titre jaune */
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.movie-une__card__nom {
-  font-size: 1.6rem;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 1rem;
-  color: #ffd700;
+  height: 100%;
+  object-fit: cover; /* L'image remplit le conteneur sans être déformée */
+  object-position: top center; /* Ajuste la position pour afficher le haut de l'image */
   z-index: 1;
+  filter: brightness(0.5);
+  border-radius: 0.625rem; /* 10px */
 }
 
-.movie-une__card__description {
-  font-size: 1rem;
-  color: #e0e0e0; /* Texte gris clair */
-  text-align: center;
-  line-height: 1.5;
+.movie-une__card-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.movie-une__title{
+.movie-une__card-content {
+  padding: 1rem 1.5rem; /* 16px 24px */
+  margin-left: 1rem; /* 16px */
+  max-width: 90%;
+  color: white;
+}
 
-  font-size: 2rem;
+.movie-une__card-titre {
+  font-size: 1.5rem; /* 24px */
   font-weight: bold;
-  color: #ffd700; /* Titre jaune */
-  text-align: center;
-  margin-top: 1.5rem;
-
+  color: #ffd700;
+  margin-bottom: 0.5rem; /* 8px */
 }
 
+.movie-une__card-desc {
+  font-size: 0.8rem; /* 12.8px */
+}
+
+/* Styles pour les écrans moyens (tablettes) */
+@media (min-width: 48rem) { /* 768px */
+  .movie-une__card-content {
+    padding: 1.5rem 2rem; /* 24px 32px */
+    margin-left: 1.5rem; /* 24px */
+    max-width: 70%;
+  }
+
+  .movie-une__card-titre {
+    font-size: 2rem; /* 32px */
+  }
+
+  .movie-une__card-desc {
+    font-size: 0.9rem; /* 14.4px */
+  }
+}
+
+/* Styles pour les écrans larges (desktop) */
+@media (min-width: 64rem) { /* 1024px */
+  .movie-une__card-content {
+    padding: 2rem 3rem; /* 32px 48px */
+    margin-left: 2rem; /* 32px */
+    max-width: 50%;
+  }
+
+  .movie-une__card-titre {
+    font-size: 2.5rem; /* 40px */
+  }
+
+  .movie-une__card-desc {
+    font-size: 1rem; /* 16px */
+  }
+}
 
 

@@ -10,10 +10,12 @@
 
 <body>
   <header id="header"></header>
-  <h1 class='movie-une__title'> Notre sélection pour vous </h1>
-  <section class="movie-une" id="Une"></section>
-  <section id="category"></section>
-  <section class="cards" id="content"></section>
+  <main class="site-container">
+    <div id="carousel-container"></div>
+    <section class="movie-une" id="Une"></section>
+    <section id="category"></section>
+    <section class="cards" id="content"></section>
+  </main>
 
 
   <!-- <section class="moviedetail" id="content"></section> -->
@@ -28,6 +30,7 @@
     import { DataProfile } from "./data/dataProfile.js";
     import { Data } from "./data/dataCategory.js";
     import { Favoris } from "./component/Favoris/script.js";
+    import { Footer } from "./component/Footer/script.js";
 
 
     import { UneMovie } from "./component/UneMovie/script.js";
@@ -44,10 +47,16 @@
       V.renderNavBar("C.handlerMovies", "C.handlerProfile", profiles);
       C.getMovie();
       C.getCategories();
-C.getCategory();
+      C.getCategory();
       C.getUneMovie();
+      V.renderFooter(); // Ajout du footer
     };
-
+    C.toggleMainTitle = function(show) {
+  const title = document.querySelector("#main-title");
+  if (title) {
+    title.style.display = show ? "block" : "none";
+  }
+};
 
     C.getMovie = async function (age) {
       let data = await DataMovie.requestMovies(age);
@@ -61,15 +70,17 @@ C.getCategory();
 
 
     C.Accueil = function () {
-        document.querySelector("#category").style.display = "block";
+  C.toggleMainTitle(true); // ← affiche le titre
 
-      if (C.profile) {
-        C.getMovie(C.profile.age);
-      } else {
-        document.querySelector("#content").innerHTML =
-        C.getMovie();      }
-      C.getUneMovie();
-    };
+  document.querySelector("#category").style.display = "block";
+  if (C.profile) {
+    C.getMovie(C.profile.age);
+  } else {
+    document.querySelector("#content").innerHTML = C.getMovie();
+  }
+  C.getUneMovie();
+  C.getCategory();
+};
 
 
     C.getCategories = async function () {
@@ -84,18 +95,14 @@ C.getCategory();
 
 
     C.handlerDetail = async function (id) {
-      document.querySelector("#category").style.display = "none";
+  C.toggleMainTitle(false); // ← cache le titre
 
-            document.querySelector("#Une").innerHTML = "";
-
-      console.log("ID reçu :", id);
-      let details = await DataMovie.requestMovieDetail(id);
-      console.log("Détails du film :", details);
-      document.querySelector("#Une").innerHTML = "";
-      V.renderMovieDetail(details[0]);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
+  document.querySelector("#category").style.display = "none";
+  document.querySelector("#Une").innerHTML = "";
+  let details = await DataMovie.requestMovieDetail(id);
+  V.renderMovieDetail(details[0]);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
     C.handlerProfile = async function () {
       const select = document.querySelector("#profile-select");
@@ -167,6 +174,8 @@ C.getCategory();
 
 
     C.readFavoris = async function () {
+      C.toggleMainTitle(false); // ← cache le titre
+
       if (!C.profile) {
         alert("Veuillez sélectionner un profil.");
         return;
@@ -186,6 +195,8 @@ C.getCategory();
       content.innerHTML = Favoris.format(favoris);
     };
     C.handlerCategory = async function (name) {
+      C.toggleMainTitle(false); // ← cache le titre
+
   const allMovies = await DataMovie.requestMovies(99); // ou autre valeur si tu veux adapter à l'âge plus tard
 
   const selectedCategory = allMovies.find(cat => cat.name.toLowerCase() === name.toLowerCase());
@@ -205,14 +216,26 @@ C.getCategory();
   // Scroll vers le haut
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
-    C.scrollLeft = function (id) {
+C.scrollLeft = function (id) {
   console.log(`Scrolling left for ID: ${id}`);
   const track = document.getElementById(id);
   if (!track) {
     console.error(`Element with ID '${id}' not found.`);
     return;
   }
-  track.scrollBy({ left: -415.008, behavior: "smooth" });
+
+  // Trouve la largeur d'une carte
+  const card = track.querySelector(".category-card, .movie-category__card, .movie-une__card");
+  if (!card) {
+    console.error("No card found in the carousel.");
+    return;
+  }
+
+  // Calcul de la largeur d'une carte + gap
+  const cardWidth = card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
+
+  // Défiler vers la gauche
+  track.scrollBy({ left: -cardWidth, behavior: "smooth" });
 };
 
 C.scrollRight = function (id) {
@@ -222,7 +245,19 @@ C.scrollRight = function (id) {
     console.error(`Element with ID '${id}' not found.`);
     return;
   }
-  track.scrollBy({ left: 415.008, behavior: "smooth" }); // Défiler vers la droite
+
+  // Trouve la largeur d'une carte
+  const card = track.querySelector(".category-card, .movie-category__card, .movie-une__card");
+  if (!card) {
+    console.error("No card found in the carousel.");
+    return;
+  }
+
+  // Calcul de la largeur d'une carte + gap
+  const cardWidth = card.offsetWidth + parseInt(getComputedStyle(track).gap || 0, 10);
+
+  // Défiler vers la droite
+  track.scrollBy({ left: cardWidth, behavior: "smooth" });
 };
     // Vue (contient tout ce qui est relatif à l'affichage)
     window.V = {};
@@ -267,6 +302,12 @@ C.scrollRight = function (id) {
     V.renderUneMovie = function (data) {
       let content = document.querySelector("#Une");
       content.innerHTML = UneMovie.format(data);
+    };
+
+    V.renderFooter = function () {
+      let footer = document.createElement("footer");
+      footer.innerHTML = Footer.render();
+      document.body.appendChild(footer);
     };
 
     C.start();

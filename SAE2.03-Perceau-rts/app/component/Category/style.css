@@ -1,9 +1,8 @@
 
 .category-card {
-  height: 16.875rem; /* Contrôle la largeur */
-  width: 25.938rem; /* Contrôle la hauteur */
+  height: 10.875rem; /* Contrôle la largeur */
+  width: 16.938rem; /* Contrôle la hauteur */
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -45,7 +44,7 @@
   gap: 1rem;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 1rem;
+
   scrollbar-width: none; /* Firefox */
 }
 .carousel__track::-webkit-scrollbar {
@@ -56,7 +55,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 3;
   background-color: white;
   border: none;
   color: var(--color-background);
@@ -81,3 +80,5 @@
 .carousel__button--right {
   right: 0.5rem;
 }
+
+

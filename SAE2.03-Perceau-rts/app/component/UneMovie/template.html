@@ -1,10 +1,11 @@
 <section class="movie-une">
-  <div class="movie-une__container">  
-      <div class="movie-une__card" onclick="{{handler}}">
-        <img src="https://mmi.unilim.fr/~perceau1/SAE2.03-Perceau/SAE2.03-Perceau-rts/server/images/{{affiche}}" alt="affiche" />
-        <p class="movie-une__card-titre">{{nom}}</p>
-        <p class="movie-une__card-desc">{{description}}</p>
+  <div class="movie-une__container">
+    <div class="carousel">
+      <button class="carousel__button carousel__button--left" onclick="C.scrollLeft('{{id}}')">&#8249;</button>
+      <div class="carousel__track" id="{{id}}">
+        {{movie-cards}}
       </div>
+      <button class="carousel__button carousel__button--right" onclick="C.scrollRight('{{id}}')">&#8250;</button>
     </div>
+  </div>
 </section>
-

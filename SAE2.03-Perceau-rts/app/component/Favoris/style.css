@@ -3,11 +3,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem; /* Espacement entre les éléments */
-    background-color: black; /* Fond sombre */
+    background-color: var(--color-background);
     padding: 1rem; /* Uniformisez le padding */
     font-family: Arial, Helvetica, sans-serif;
     width: 100%; /* Assurez-vous que la largeur occupe tout l'espace */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+
+    scroll-margin-top: 5rem; /* Ajoutez également si nécessaire */
+
 }
 
 .movie-card {
@@ -183,4 +186,9 @@
 .removeFavoris_button:active {
   background-color: #003f7f; 
   transform: scale(0.95); 
+}
+
+
+.favoris{
+  padding-top:10rem;
 }
